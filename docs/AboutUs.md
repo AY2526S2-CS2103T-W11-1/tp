@@ -11,47 +11,37 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Zhou Jinhao
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/chulan142857.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/chulan142857)]
 
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
+* Role: Developer
 * Responsibilities: UI
 
-### Johnny Doe
+### Debopam Roy
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/debopamroy1.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/DebopamRoy1)]
 
 * Role: Developer
 * Responsibilities: Data
 
 ### Han Shangda
 <img src="images/Shangda777.png" width="200px">
-email address: e1300503@u.nus.edu
+
 [[github](http://github.com/Shangda777)]
 
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Develop
+
+### Manya Agarwal
+
+<img src="images/15-manya.png" width="200px">
+
+[[github](https://github.com/15-Manya)]
+
+* Role: Team Lead
+* Responsibilities: Responsible for overall project coordination.
