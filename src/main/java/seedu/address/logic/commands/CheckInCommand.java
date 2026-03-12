@@ -12,6 +12,9 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 
+/**
+ * Marks the attendance of the person.
+ */
 public class CheckInCommand extends Command {
 
     public static final String COMMAND_WORD = "checkin";
@@ -26,6 +29,9 @@ public class CheckInCommand extends Command {
 
     private final Index index;
 
+    /**
+     * Creates a checkInCommand to check-in the specified {@code Person}
+     */
     public CheckInCommand(Index index) {
         requireAllNonNull(index);
 
