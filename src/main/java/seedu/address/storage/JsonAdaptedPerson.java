@@ -3,6 +3,7 @@ package seedu.address.storage;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -12,9 +13,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.GitHub;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.RsvpStatus;
+import seedu.address.model.person.Team;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -28,6 +32,9 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
+    private final String team;
+    private final String github;
+    private final String rsvpStatus;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -36,11 +43,15 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("team") String team, @JsonProperty("github") String github,
+            @JsonProperty("rsvpStatus") String rsvpStatus, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.team = team;
+        this.github = github;
+        this.rsvpStatus = rsvpStatus;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -54,6 +65,9 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        team = source.getTeam().map(t -> t.teamName).orElse(null);
+        github = source.getGitHub().map(g -> g.value).orElse(null);
+        rsvpStatus = source.getRsvpStatus().toString();
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -102,8 +116,25 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        final Optional<Team> modelTeam;
+        if (team != null && !team.isEmpty()) {
+            if (!Team.isValidTeam(team)) {
+                throw new IllegalValueException(Team.MESSAGE_CONSTRAINTS);
+            }
+            modelTeam = Optional.of(new Team(team));
+        } else {
+            modelTeam = Optional.empty();
+        }
+
+        final GitHub modelGitHub = (github != null && GitHub.isValidGitHub(github))
+                ? new GitHub(github) : null;
+
+        final RsvpStatus modelRsvpStatus = (rsvpStatus != null && RsvpStatus.isValidRsvpStatus(rsvpStatus))
+                ? new RsvpStatus(rsvpStatus) : new RsvpStatus("pending");
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTeam, modelTags,
+                modelGitHub, modelRsvpStatus);
     }
 
 }

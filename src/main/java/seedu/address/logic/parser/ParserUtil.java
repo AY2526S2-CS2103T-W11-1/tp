@@ -11,8 +11,11 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.GitHub;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.RsvpStatus;
+import seedu.address.model.person.Team;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -121,4 +124,50 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    /**
+     * Parses a {@code String team} into a {@code Team}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code team} is invalid.
+     */
+    public static Team parseTeam(String team) throws ParseException {
+        requireNonNull(team);
+        String trimmedTeam = team.trim();
+        if (!Team.isValidTeam(trimmedTeam)) {
+            throw new ParseException(Team.MESSAGE_CONSTRAINTS);
+        }
+        return new Team(trimmedTeam);
+    }
+
+    /**
+     * Parses a {@code String github} into a {@code GitHub}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code github} is invalid.
+     */
+    public static GitHub parseGitHub(String github) throws ParseException {
+        requireNonNull(github);
+        String trimmed = github.trim();
+        if (!GitHub.isValidGitHub(trimmed)) {
+            throw new ParseException(GitHub.MESSAGE_CONSTRAINTS);
+        }
+        return new GitHub(trimmed);
+    }
+
+    /**
+     * Parses a {@code String rsvp} into a {@code RsvpStatus}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code rsvp} is invalid.
+     */
+    public static RsvpStatus parseRsvpStatus(String rsvp) throws ParseException {
+        requireNonNull(rsvp);
+        String trimmed = rsvp.trim();
+        if (!RsvpStatus.isValidRsvpStatus(trimmed)) {
+            throw new ParseException(RsvpStatus.MESSAGE_CONSTRAINTS);
+        }
+        return new RsvpStatus(trimmed);
+    }
+
 }
