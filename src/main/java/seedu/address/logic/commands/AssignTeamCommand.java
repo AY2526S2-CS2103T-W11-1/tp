@@ -33,6 +33,9 @@ public class AssignTeamCommand extends Command {
     private final Index index;
     private final Team team;
 
+    /**
+     * Creates an assign-team command targeting the participant at {@code index}.
+     */
     public AssignTeamCommand(Index index, Team team) {
         requireNonNull(index);
         requireNonNull(team);
