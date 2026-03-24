@@ -1,13 +1,17 @@
 ---
 
-##   layout: default.md
-  title: "User Guide"
-  pageNav: 3
+---
+layout: default.md
+title: "User Guide"
+pageNav: 3
+---
 
 # TeamEventPro User Guide
 
-TeamEventPro is a **desktop app for managing tech meetup attendees**, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, TeamEventPro can get your event management tasks done faster than traditional GUI apps.
-
+TeamEventPro is a **desktop** app for managing tech meetup attendees, 
+optimized for use via a Command Line Interface (CLI) while still having the benefits 
+of a Graphical User Interface (GUI). If you can type fast, TeamEventPro can get 
+your event management tasks done faster than traditional GUI apps.
 ---
 
 ## Quick start
@@ -16,7 +20,7 @@ TeamEventPro is a **desktop app for managing tech meetup attendees**, optimized 
 
   **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 2. Download the latest `.jar` file from [Releases](https://github.com/AY2526S2-CS2103T-W11-1/tp/releases).
-3. Copy the file to the folder you want to use as the *home folder* for TeamEventPro.
+3. Copy the file to the folder you want to use as the *home folder* for TeamEventPro. 
 4. Open a command terminal, `cd` into the folder containing the jar file, and run `java -jar addressbook.jar`.  
 
   A GUI similar to the below should appear in a few seconds.   
