@@ -202,7 +202,7 @@ public class ParserUtil {
         }
         return new EventDate(trimmed);
     }
-    
+
     /**
      * Parses a {@code String attendance} into a {@code Attendance}.
      * Leading and trailing whitespaces will be trimmed.
