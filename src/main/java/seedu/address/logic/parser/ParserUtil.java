@@ -9,6 +9,8 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.event.EventDate;
+import seedu.address.model.event.EventName;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Email;
@@ -172,20 +174,33 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String attendance} into a {@code Attendance}.
+     * Parses a {@code String name} into an {@code EventName}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code attendance} is invalid.
+     * @throws ParseException if the given {@code name} is invalid.
      */
-    public static Attendance parseAttendance(String attendance) throws ParseException {
-        requireNonNull(attendance);
-        String trimmed = attendance.trim();
-        if (trimmed.equalsIgnoreCase("yes")) {
-            return new Attendance(true);
-        } else if (trimmed.equalsIgnoreCase("no")) {
-            return new Attendance(false);
-        } else {
-            throw new ParseException(Attendance.MESSAGE_CONSTRAINTS);
+    public static EventName parseEventName(String name) throws ParseException {
+        requireNonNull(name);
+        String trimmed = name.trim();
+        if (!EventName.isValidEventName(trimmed)) {
+            throw new ParseException(EventName.MESSAGE_CONSTRAINTS);
         }
+        return new EventName(trimmed);
     }
+
+    /**
+     * Parses a {@code String date} into an {@code EventDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code date} is invalid.
+     */
+    public static EventDate parseEventDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmed = date.trim();
+        if (!EventDate.isValidEventDate(trimmed)) {
+            throw new ParseException(EventDate.MESSAGE_CONSTRAINTS);
+        }
+        return new EventDate(trimmed);
+    }
+
 }
