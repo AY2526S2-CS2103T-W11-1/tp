@@ -93,8 +93,8 @@ public class EditEventCommandTest {
 
         EditEventCommand editEventCommand = new EditEventCommand(Index.fromOneBased(1), descriptor);
 
-        assertThrows(CommandException.class, EditEventCommand.MESSAGE_DUPLICATE_EVENT,
-                () -> editEventCommand.execute(model));
+        assertThrows(CommandException.class,
+                EditEventCommand.MESSAGE_DUPLICATE_EVENT, () -> editEventCommand.execute(model));
     }
 
     @Test
@@ -104,8 +104,8 @@ public class EditEventCommandTest {
 
         EditEventCommand editEventCommand = new EditEventCommand(Index.fromOneBased(3), descriptor);
 
-        assertThrows(CommandException.class, EditEventCommand.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX,
-                () -> editEventCommand.execute(model));
+        assertThrows(CommandException.class,
+                EditEventCommand.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX, () -> editEventCommand.execute(model));
     }
 
     @Test
@@ -117,8 +117,8 @@ public class EditEventCommandTest {
 
         EditEventCommand editEventCommand = new EditEventCommand(Index.fromOneBased(1), descriptor);
 
-        assertThrows(CommandException.class, EditEventCommand.MESSAGE_LEAVE_EVENT_VIEW_FIRST,
-                () -> editEventCommand.execute(model));
+        assertThrows(CommandException.class,
+                EditEventCommand.MESSAGE_LEAVE_EVENT_VIEW_FIRST, () -> editEventCommand.execute(model));
     }
 
     @Test
@@ -149,7 +149,8 @@ public class EditEventCommandTest {
         assertEquals(expected, editEventCommand.toString());
     }
 
-    private static Event createEvent(String name, String date, Optional<String> location, Optional<String> description) {
+    private static Event createEvent(String name, String date,
+            Optional<String> location, Optional<String> description) {
         return new Event(new EventName(name), new EventDate(date), location, description);
     }
 

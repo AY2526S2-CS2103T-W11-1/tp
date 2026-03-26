@@ -68,8 +68,8 @@ public class DeleteEventCommandTest {
     public void execute_invalidIndex_failure() {
         DeleteEventCommand deleteEventCommand = new DeleteEventCommand(Index.fromOneBased(3));
 
-        assertThrows(CommandException.class, DeleteEventCommand.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX,
-                () -> deleteEventCommand.execute(model));
+        assertThrows(CommandException.class,
+                DeleteEventCommand.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX, () -> deleteEventCommand.execute(model));
     }
 
     @Test
@@ -78,8 +78,8 @@ public class DeleteEventCommandTest {
 
         DeleteEventCommand deleteEventCommand = new DeleteEventCommand(Index.fromOneBased(1));
 
-        assertThrows(CommandException.class, DeleteEventCommand.MESSAGE_LEAVE_EVENT_VIEW_FIRST,
-                () -> deleteEventCommand.execute(model));
+        assertThrows(CommandException.class,
+                DeleteEventCommand.MESSAGE_LEAVE_EVENT_VIEW_FIRST, () -> deleteEventCommand.execute(model));
     }
 
     @Test
@@ -102,7 +102,8 @@ public class DeleteEventCommandTest {
         assertEquals(expected, deleteEventCommand.toString());
     }
 
-    private static Event createEvent(String name, String date, Optional<String> location, Optional<String> description) {
+    private static Event createEvent(String name, String date,
+            Optional<String> location, Optional<String> description) {
         return new Event(new EventName(name), new EventDate(date), location, description);
     }
 
