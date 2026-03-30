@@ -98,6 +98,7 @@ public class LogicManagerTest {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         logic = new LogicManager(model, new StorageManager(
                 new JsonAddressBookStorage(temporaryFolder.resolve("liveSearchAddressBook.json")),
+                new JsonEventBookStorage(temporaryFolder.resolve("liveSearchEventBook.json")),
                 new JsonUserPrefsStorage(temporaryFolder.resolve("liveSearchUserPrefs.json"))));
 
         logic.updateLiveSearch("johnd@example.com");
@@ -110,6 +111,7 @@ public class LogicManagerTest {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         logic = new LogicManager(model, new StorageManager(
                 new JsonAddressBookStorage(temporaryFolder.resolve("liveSearchResetAddressBook.json")),
+                new JsonEventBookStorage(temporaryFolder.resolve("liveSearchResetEventBook.json")),
                 new JsonUserPrefsStorage(temporaryFolder.resolve("liveSearchResetUserPrefs.json"))));
 
         logic.updateLiveSearch("Benson");
