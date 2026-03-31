@@ -30,10 +30,19 @@ public class StatisticsPanel extends UiPart<Region> {
     private static final String FXML = "StatisticsPanel.fxml";
 
     @FXML
-    private TextArea eventSummaryText;
+    private VBox rsvpLegendBox;
 
     @FXML
-    private VBox rsvpLegendBox;
+    private Label totalParticipantsValue;
+
+    @FXML
+    private Label rsvpYesValue;
+
+    @FXML
+    private Label checkinsValue;
+
+    @FXML
+    private Label teamsValue;
 
     @FXML
     private TextArea tagDistributionText;
@@ -62,12 +71,10 @@ public class StatisticsPanel extends UiPart<Region> {
      */
     public void update(StatisticsSummary summary) {
         requireNonNull(summary);
-        eventSummaryText.setText(new StringBuilder()
-                .append("Total participants: ").append(summary.getTotalCount()).append("\n")
-                .append("RSVP Yes: ").append(summary.getRsvpYesCount()).append("\n")
-                .append("Check-ins: ").append(summary.getCheckedInCount()).append("\n")
-                .append("Teams: ").append(summary.getTeamCount())
-                .toString());
+        totalParticipantsValue.setText(String.valueOf(summary.getTotalCount()));
+        rsvpYesValue.setText(String.valueOf(summary.getRsvpYesCount()));
+        checkinsValue.setText(String.valueOf(summary.getCheckedInCount()));
+        teamsValue.setText(String.valueOf(summary.getTeamCount()));
 
         updateRsvpLegend(summary);
         updateCheckinLegend(summary);
@@ -161,6 +168,8 @@ public class StatisticsPanel extends UiPart<Region> {
 
         barChart.setHorizontalZeroLineVisible(false);
         barChart.setVerticalZeroLineVisible(false);
+        barChart.setMaxWidth(Double.MAX_VALUE);
+        HBox.setHgrow(barChart, javafx.scene.layout.Priority.ALWAYS);
 
         tagChartPlaceholder.getChildren().add(barChart);
 

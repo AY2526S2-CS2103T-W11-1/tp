@@ -25,17 +25,17 @@
 }
 
 .stats-main-heading {
-    -fx-font-size: 18pt;
-    -fx-font-family: "Segoe UI Bold";
-    -fx-underline: true;
+    -fx-font-size: 24pt;
+    -fx-font-family: "Segoe UI";
+    -fx-font-weight: 700;
     -fx-text-fill: white;
     -fx-opacity: 1;
 }
 
 .stats-sub-heading {
-    -fx-font-size: 14pt;
-    -fx-font-family: "Segoe UI Semibold";
-    -fx-underline: true;
+    -fx-font-size: 18pt;
+    -fx-font-family: "Segoe UI";
+    -fx-font-weight: 600;
     -fx-text-fill: white;
     -fx-opacity: 1;
 }
@@ -381,6 +381,25 @@
     -fx-background-color: derive(#1d1d1d, 20%);
 }
 
+.stats-summary-card {
+    -fx-padding: 18 22 18 22;
+    -fx-min-height: 130px;
+    -fx-background-color: derive(#1d1d1d, 30%);
+    -fx-background-radius: 8;
+}
+
+.stats-summary-title {
+    -fx-text-fill: #b0bec5;
+    -fx-font-size: 15px;
+    -fx-font-family: "Segoe UI";
+}
+
+.stats-summary-value {
+    -fx-text-fill: white;
+    -fx-font-size: 34px;
+    -fx-font-family: "Segoe UI Semibold";
+}
+
 .donut-chart {
     -fx-pie-label-visible: false;
     -fx-background-color: transparent;
@@ -424,6 +443,9 @@
 
 .stats-legend-label {
     -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-padding: 1 0 1 0;
 }
 
 /* Tag bar chart styling */
