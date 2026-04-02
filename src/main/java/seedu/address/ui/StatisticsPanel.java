@@ -154,7 +154,7 @@ public class StatisticsPanel extends UiPart<Region> {
         barChart.setPadding(new Insets(0, 20, 0, 0));
 
         BarChart.Series<Number, String> series = new BarChart.Series<>();
-        List<Double> finalValues = new java.util.ArrayList<>();
+        List<Double> finalValues = new ArrayList<>();
         summary.getTagCounts().forEach((tag, count) -> {
             series.getData().add(new BarChart.Data<>(0.0, tag));
             finalValues.add(count.doubleValue());
