@@ -60,9 +60,4 @@ public interface Logic {
      * Returns the person to view.
      */
     Optional<Person> getPersonToView();
-
-    /**
-     * Sets the person to view.
-     */
-    void setPersonToView(Optional<Person> person);
 }

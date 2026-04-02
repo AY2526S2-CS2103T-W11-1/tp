@@ -23,7 +23,7 @@ public class ViewCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_VIEW_PERSON_SUCCESS = "Viewed Applicant: %1$s";
+    public static final String MESSAGE_VIEW_PERSON_SUCCESS = "Viewed Applicant [%1$d]";
 
     private final Index targetIndex;
 
@@ -44,7 +44,7 @@ public class ViewCommand extends Command {
         }
         Person personToView = personList.get(targetIndex.getZeroBased());
         model.setPersonToView(Optional.of(personToView));
-        return new CommandResult(String.format(MESSAGE_VIEW_PERSON_SUCCESS, Messages.format(personToView)));
+        return new CommandResult(String.format(MESSAGE_VIEW_PERSON_SUCCESS, targetIndex.getOneBased()));
     }
 
     @Override

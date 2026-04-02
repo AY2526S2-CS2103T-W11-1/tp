@@ -102,9 +102,4 @@ public class LogicManager implements Logic {
     public Optional<Person> getPersonToView() {
         return model.getPersonToView();
     }
-
-    @Override
-    public void setPersonToView(Optional<Person> personToView) {
-        model.setPersonToView(personToView);
-    }
 }
