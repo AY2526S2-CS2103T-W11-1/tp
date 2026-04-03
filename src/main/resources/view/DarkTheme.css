@@ -13,40 +13,49 @@
  *   card-surface    #13161e   list card fill (subtle lift vs app-bg)
  *   legacy-gray     #1d1d1d   table base, buttons (unchanged AB3)
  *   command-field   #383838   command / result text areas (legacy)
+ *   app-font        JetBrains Mono app-wide (bundled, fonts/JetBrainsMono-Regular.ttf)
  * ---------------------------------------------------------------------------
  */
+
+@font-face {
+    font-family: "JetBrains Mono";
+    font-style: normal;
+    font-weight: normal;
+    src: url("../fonts/JetBrainsMono-Regular.ttf");
+}
 
 /* ========== Base (scene root + main VBox) ========== */
 .root,
 .background {
     -fx-background-color: #0f1117;
+    -fx-font-family: "JetBrains Mono", "SF Mono", "Consolas", monospace;
 }
 
 /* ========== Typography — global labels ========== */
 .label {
     -fx-font-size: 11pt;
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-weight: bold;
     -fx-text-fill: #555555;
     -fx-opacity: 0.9;
 }
 
 .label-bright {
     -fx-font-size: 11pt;
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-weight: bold;
     -fx-text-fill: white;
     -fx-opacity: 1;
 }
 
 .label-header {
     -fx-font-size: 32pt;
-    -fx-font-family: "Segoe UI Light";
+    -fx-font-weight: normal;
     -fx-text-fill: white;
     -fx-opacity: 1;
 }
 
 .stats-main-heading {
     -fx-font-size: 18pt;
-    -fx-font-family: "Segoe UI Bold";
+    -fx-font-weight: bold;
     -fx-underline: true;
     -fx-text-fill: white;
     -fx-opacity: 1;
@@ -54,7 +63,7 @@
 
 .stats-sub-heading {
     -fx-font-size: 14pt;
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-weight: bold;
     -fx-underline: true;
     -fx-text-fill: white;
     -fx-opacity: 1;
@@ -62,7 +71,16 @@
 
 .text-field {
     -fx-font-size: 12pt;
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-weight: bold;
+}
+
+/* Popups / editors often keep Modena’s font unless set explicitly */
+.text-area,
+.tooltip,
+.combo-box-base,
+.menu-item,
+.menu-item .label {
+    -fx-font-family: "JetBrains Mono", "SF Mono", "Consolas", monospace;
 }
 
 /* ========== Tab pane (headers hidden in AB3) ========== */
@@ -104,7 +122,7 @@
 
 .table-view .column-header .label {
     -fx-font-size: 20pt;
-    -fx-font-family: "Segoe UI Light";
+    -fx-font-weight: normal;
     -fx-text-fill: white;
     -fx-alignment: center-left;
     -fx-opacity: 1;
@@ -172,13 +190,13 @@
 
 /* ========== Person / event card text ========== */
 .cell_big_label {
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-weight: bold;
     -fx-font-size: 16px;
     -fx-text-fill: #010504;
 }
 
 .cell_small_label {
-    -fx-font-family: "Segoe UI";
+    -fx-font-weight: normal;
     -fx-font-size: 13px;
     -fx-text-fill: #010504;
 }
@@ -225,20 +243,18 @@
 /* Command feedback line (ResultDisplay Label) — terminal-style green */
 .result-display {
     -fx-background-color: transparent;
-    -fx-font-family: "SF Mono", "Consolas", "Courier New", monospace;
     -fx-font-size: 12pt;
     -fx-text-fill: #4ade80;
     -fx-padding: 2 0 2 0;
 }
 
 .command-prompt {
-    -fx-font-family: "SF Mono", "Consolas", "Courier New", monospace;
     -fx-font-size: 12pt;
     -fx-text-fill: #a5b4fc;
 }
 
 .status-bar .label {
-    -fx-font-family: "Segoe UI Light";
+    -fx-font-weight: normal;
     -fx-text-fill: white;
     -fx-padding: 4px;
     -fx-pref-height: 30px;
@@ -278,7 +294,7 @@
 
 .menu-bar .label {
     -fx-font-size: 14pt;
-    -fx-font-family: "Segoe UI Light";
+    -fx-font-weight: normal;
     -fx-text-fill: white;
     -fx-opacity: 0.9;
 }
@@ -298,7 +314,7 @@
     -fx-border-width: 2;
     -fx-background-radius: 0;
     -fx-background-color: #1d1d1d;
-    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-weight: normal;
     -fx-font-size: 11pt;
     -fx-text-fill: #d8d8d8;
     -fx-background-insets: 0 0 0 0, 0, 1, 2;
@@ -413,7 +429,7 @@
     -fx-border-insets: 0;
     -fx-border-width: 1;
     -fx-padding: 6 10 6 10;
-    -fx-font-family: "SF Mono", "Consolas", "Courier New", monospace;
+    -fx-font-weight: normal;
     -fx-font-size: 12pt;
     -fx-text-fill: #e5e7eb;
     -fx-prompt-text-fill: #6b7280;
