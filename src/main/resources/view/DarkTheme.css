@@ -83,6 +83,13 @@
     -fx-font-family: "JetBrains Mono", "SF Mono", "Consolas", monospace;
 }
 
+/* TextAreas (e.g. statistics tag details) */
+.text-area {
+    -fx-control-inner-background: #0f1117;
+    -fx-background-color: #0f1117;
+    -fx-text-fill: white;
+}
+
 /* ========== Tab pane (headers hidden in AB3) ========== */
 .tab-pane {
     -fx-padding: 0 0 0 1;
