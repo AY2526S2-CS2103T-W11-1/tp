@@ -157,7 +157,7 @@
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
     /* Inset so #cardPane border reads as an inner frame; vertical gap separates cards */
-    -fx-padding: 6 10 6 10;
+    -fx-padding: 10 12 10 12;
 }
 
 .list-cell:filled:even,
@@ -193,17 +193,19 @@
     -fx-font-weight: bold;
     -fx-font-size: 16px;
     -fx-text-fill: #010504;
+    -fx-padding: 0 0 2 0;
 }
 
 .cell_small_label {
     -fx-font-weight: normal;
     -fx-font-size: 13px;
     -fx-text-fill: #010504;
+    -fx-padding: 0 0 3 0;
 }
 
 /* ========== Status chips (check-in on list cards) ========== */
 .status-label {
-    -fx-padding: 3 10 3 10;
+    -fx-padding: 4 12 4 12;
     -fx-background-radius: 999;
     -fx-border-radius: 999;
     -fx-font-size: 10px;
@@ -245,7 +247,7 @@
     -fx-background-color: transparent;
     -fx-font-size: 12pt;
     -fx-text-fill: #4ade80;
-    -fx-padding: 2 0 2 0;
+    -fx-padding: 5 0 5 0;
 }
 
 .command-prompt {
@@ -290,10 +292,11 @@
 
 .menu-bar {
     -fx-background-color: #0f1117;
+    -fx-padding: 3 8 3 8;
 }
 
 .menu-bar .label {
-    -fx-font-size: 14pt;
+    -fx-font-size: 10pt;
     -fx-font-weight: normal;
     -fx-text-fill: white;
     -fx-opacity: 0.9;
@@ -433,7 +436,7 @@
     -fx-font-size: 12pt;
     -fx-text-fill: #e5e7eb;
     -fx-prompt-text-fill: #6b7280;
-    -fx-pref-height: 30;
+    -fx-pref-height: 34;
     -fx-focus-color: transparent;
     -fx-faint-focus-color: transparent;
 }
@@ -448,14 +451,15 @@
 }
 
 #tags {
-    -fx-hgap: 7;
-    -fx-vgap: 3;
+    -fx-hgap: 8;
+    -fx-vgap: 5;
+    -fx-padding: 4 0 6 0;
 }
 
 #tags .label {
     -fx-text-fill: white;
     -fx-background-color: #3e7b91;
-    -fx-padding: 1 3 1 3;
+    -fx-padding: 3 7 3 7;
     -fx-border-radius: 2;
     -fx-background-radius: 2;
     -fx-font-size: 11;
