@@ -36,6 +36,7 @@ public class PersonDetailPanel extends UiPart<Region> {
     private Label attendanceValue;
     @FXML
     private VBox teamRow;
+    private Label teamKeyLabel;
     @FXML
     private Label teamValue;
     @FXML
@@ -46,6 +47,7 @@ public class PersonDetailPanel extends UiPart<Region> {
      */
     public PersonDetailPanel() {
         super(FXML);
+        ensureTeamChipStyles();
         setDetailText("Details coming soon. Use: view INDEX");
     }
 
