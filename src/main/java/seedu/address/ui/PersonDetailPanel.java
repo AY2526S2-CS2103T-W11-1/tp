@@ -47,7 +47,6 @@ public class PersonDetailPanel extends UiPart<Region> {
      */
     public PersonDetailPanel() {
         super(FXML);
-        ensureTeamChipStyles();
         setDetailText("Details coming soon. Use: view INDEX");
     }
 
