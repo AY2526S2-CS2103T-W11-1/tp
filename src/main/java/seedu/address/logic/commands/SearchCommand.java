@@ -34,7 +34,7 @@ public class SearchCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         if (!model.isInEventParticipantsMode()) {
-            throw new CommandException(Messages.MESSAGE_ENTER_EVENT_FIRST);
+            model.showGlobalPersonList();
         }
         model.updateFilteredPersonList(predicate);
         return new CommandResult(

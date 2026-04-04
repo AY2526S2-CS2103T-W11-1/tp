@@ -134,9 +134,11 @@ public class MainWindow extends UiPart<Stage> {
 
     private void updateModeView() {
         boolean inParticipantsMode = logic.isInEventParticipantsMode();
+        boolean showingGlobalPersonList = logic.isShowingGlobalPersonList();
+        boolean shouldShowPersonList = inParticipantsMode || showingGlobalPersonList;
 
-        personListPanelPlaceholder.setVisible(inParticipantsMode);
-        personListPanelPlaceholder.setManaged(inParticipantsMode);
+        personListPanelPlaceholder.setVisible(shouldShowPersonList);
+        personListPanelPlaceholder.setManaged(shouldShowPersonList);
 
         eventListPanelPlaceholder.setVisible(!inParticipantsMode);
         eventListPanelPlaceholder.setManaged(!inParticipantsMode);

@@ -93,6 +93,11 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public boolean isShowingGlobalPersonList() {
+        return model.isShowingGlobalPersonList();
+    }
+
+    @Override
     public boolean isInEventParticipantsMode() {
         return model.isInEventParticipantsMode();
     }

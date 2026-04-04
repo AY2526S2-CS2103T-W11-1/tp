@@ -6,15 +6,20 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.event.Event;
+import seedu.address.model.event.EventDate;
+import seedu.address.model.event.EventName;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
@@ -86,6 +91,34 @@ public class ModelManagerTest {
     public void hasPerson_personInAddressBook_returnsTrue() {
         modelManager.addPerson(ALICE);
         assertTrue(modelManager.hasPerson(ALICE));
+    }
+
+    @Test
+    public void showGlobalPersonList_notInEventMode_setsGlobalPersonListMode() {
+        modelManager.showGlobalPersonList();
+
+        assertTrue(modelManager.isShowingGlobalPersonList());
+        assertFalse(modelManager.isInEventParticipantsMode());
+    }
+
+    @Test
+    public void showGlobalPersonList_eventParticipantsIncludedInAggregatedList() {
+        Event event = new Event(
+                new EventName("Networking Night"),
+                new EventDate("2026-10-01"),
+                Optional.empty(),
+                Optional.empty());
+        event.addParticipant(AMY);
+
+        EventBook eventBook = new EventBook();
+        eventBook.addEvent(event);
+        modelManager = new ModelManager(new AddressBookBuilder().withPerson(ALICE).build(), eventBook, new UserPrefs());
+
+        modelManager.showGlobalPersonList();
+
+        assertTrue(modelManager.getFilteredPersonList().contains(ALICE));
+        assertTrue(modelManager.getFilteredPersonList().contains(AMY));
+        assertEquals(2, modelManager.getFilteredPersonList().size());
     }
 
     @Test

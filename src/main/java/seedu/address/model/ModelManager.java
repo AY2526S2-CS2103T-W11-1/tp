@@ -25,6 +25,7 @@ public class ModelManager implements Model {
     private FilteredList<Person> filteredPersons;
     private final EventBook eventBook;
     private Event activeEvent;
+    private boolean isShowingGlobalPersonList;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -38,6 +39,7 @@ public class ModelManager implements Model {
         this.eventBook = new EventBook(eventBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        isShowingGlobalPersonList = false;
     }
 
     /** Creates a ModelManager with empty data. */
@@ -171,9 +173,23 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean isShowingGlobalPersonList() {
+        return isShowingGlobalPersonList;
+    }
+
+    @Override
+    public void showGlobalPersonList() {
+        activeEvent = null;
+        isShowingGlobalPersonList = true;
+        filteredPersons = new FilteredList<>(buildGlobalPersonListSnapshot());
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
     public void enterEvent(Event event) {
         requireNonNull(event);
         activeEvent = event;
+        isShowingGlobalPersonList = false;
         filteredPersons = new FilteredList<>(activeEvent.getParticipants().getPersonList());
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
@@ -181,6 +197,7 @@ public class ModelManager implements Model {
     @Override
     public void leaveEvent() {
         activeEvent = null;
+        isShowingGlobalPersonList = false;
         filteredPersons = new FilteredList<>(addressBook.getPersonList());
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
@@ -207,6 +224,7 @@ public class ModelManager implements Model {
     @Override
     public void addEvent(Event event) {
         eventBook.addEvent(event);
+        refreshGlobalPersonListIfShowing();
     }
 
     @Override
@@ -217,6 +235,8 @@ public class ModelManager implements Model {
             activeEvent = editedEvent;
             filteredPersons = new FilteredList<>(activeEvent.getParticipants().getPersonList());
             updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        } else {
+            refreshGlobalPersonListIfShowing();
         }
     }
 
@@ -226,6 +246,8 @@ public class ModelManager implements Model {
         eventBook.removeEvent(target);
         if (activeEvent == target) {
             leaveEvent();
+        } else {
+            refreshGlobalPersonListIfShowing();
         }
     }
 
@@ -245,5 +267,33 @@ public class ModelManager implements Model {
         return eventBook.getEventList();
     }
 
+    /**
+     * Builds a de-duplicated snapshot of all persons that should appear in the global list view.
+     * Persons from the root address book are kept first, then participants from every event are added
+     * if they are not already present.
+     */
+    private ObservableList<Person> buildGlobalPersonListSnapshot() {
+        AddressBook aggregatedAddressBook = new AddressBook(addressBook);
+
+        for (Event event : eventBook.getEventList()) {
+            for (Person participant : event.getParticipants().getPersonList()) {
+                if (!aggregatedAddressBook.hasPerson(participant)) {
+                    aggregatedAddressBook.addPerson(participant);
+                }
+            }
+        }
+
+        return aggregatedAddressBook.getPersonList();
+    }
+
+    /**
+     * Rebuilds the global person snapshot when the UI is currently showing the global list view.
+     */
+    private void refreshGlobalPersonListIfShowing() {
+        if (isShowingGlobalPersonList && activeEvent == null) {
+            filteredPersons = new FilteredList<>(buildGlobalPersonListSnapshot());
+            updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        }
+    }
 
 }

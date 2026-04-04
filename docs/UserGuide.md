@@ -32,7 +32,7 @@ your event management tasks done faster than traditional GUI apps.
   - `addevent n/Tech Meetup d/2026-06-15 l/NUS Techno Edge desc/Annual networking session` : Adds an event.
   - `enter event 1` : Enters the 1st event so applicant commands operate on that event's participant list.
   - `deleteevent 2` : Deletes the 2nd event and its participant list.
-  - `list` : Lists all applicants in the current event.
+  - `list` : Lists all applicants, or all applicants in the current event if you have entered one.
   - `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 tm/Dev g/johndoe r/yes` : Adds an applicant with team, GitHub, and RSVP status.
   - `filter r/yes` : Filters to show only applicants who have RSVP'd yes.
   - `checkin 1` : Marks the 1st applicant in the current list as checked in.
@@ -168,11 +168,13 @@ Examples:
 
 ### Listing all applicants : `list`
 
-Lists all the people in the directory.
+Lists all people in the current context.
 
 Format: `list`
 
-- You must enter an event first using `enter event INDEX`.
+- Before entering an event, `list` shows all unique people across the global address book and every event's
+  participant list.
+- After entering an event with `enter event INDEX`, `list` shows only the applicants in that event.
 
 ### Editing an applicant : `edit`
 
@@ -253,7 +255,9 @@ Format: `search KEYWORD [MORE_KEYWORDS]`
 - Names use full-word matching e.g. `Han` will not match `Hans`
 - Email and GitHub username matches use case-insensitive substring matching.
 - Applicants matching at least one keyword will be returned (i.e. `OR` search).
-- You must enter an event first using `enter event INDEX`.
+- Before entering an event, `search` searches across all unique people in the global address book and every event's
+  participant list.
+- After entering an event with `enter event INDEX`, `search` searches only the applicants in that event.
 
 Examples:
 

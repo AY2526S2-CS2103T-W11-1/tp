@@ -127,6 +127,21 @@ public interface Model {
     ObservableList<Event> getFilteredEventList();
 
     /**
+     * Returns true if the app is currently showing the global person list
+     * while remaining outside any specific event.
+     */
+    default boolean isShowingGlobalPersonList() {
+        return false;
+    }
+
+    /**
+     * Switches the UI context to the global person list.
+     */
+    default void showGlobalPersonList() {
+        // Default is a no-op for test stubs.
+    }
+
+    /**
      * Returns true if the app context is currently set to the participants (address book)
      * of a selected event.
      */
