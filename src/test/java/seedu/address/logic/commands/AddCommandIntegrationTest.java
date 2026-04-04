@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.enterDefaultEvent;
@@ -46,6 +47,21 @@ public class AddCommandIntegrationTest {
         Person personInList = model.getAddressBook().getPersonList().get(0);
         assertCommandFailure(new AddCommand(personInList), model,
                 AddCommand.MESSAGE_DUPLICATE_PERSON);
+    }
+
+    @Test
+    public void execute_newPersonInEvent_visibleInGlobalListAfterLeavingEvent() throws Exception {
+        Person validPerson = new PersonBuilder().withName("Global Sync Person").build();
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        enterDefaultEvent(expectedModel);
+        expectedModel.addPerson(validPerson);
+
+        assertCommandSuccess(new AddCommand(validPerson), model,
+                String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+                expectedModel);
+
+        model.leaveEvent();
+        assertTrue(model.hasPerson(validPerson));
     }
 
 }

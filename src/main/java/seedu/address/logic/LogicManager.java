@@ -77,6 +77,10 @@ public class LogicManager implements Logic {
 
     @Override
     public void updateLiveSearch(String queryText) {
+        if (!model.isInEventParticipantsMode()) {
+            model.showGlobalPersonList();
+        }
+
         List<String> keywords = Arrays.stream(queryText.trim().split("\\s+"))
                 .filter(keyword -> !keyword.isBlank())
                 .toList();
@@ -127,6 +131,11 @@ public class LogicManager implements Logic {
     @Override
     public boolean isInEventParticipantsMode() {
         return model.isInEventParticipantsMode();
+    }
+
+    @Override
+    public boolean isShowingGlobalPersonList() {
+        return model.isShowingGlobalPersonList();
     }
 
     @Override

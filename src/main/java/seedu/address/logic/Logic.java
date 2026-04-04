@@ -48,6 +48,9 @@ public interface Logic {
     /** Returns true if the app is currently showing the participants (address book) mode. */
     boolean isInEventParticipantsMode();
 
+    /** Returns true if the app is currently showing the global person list outside any event. */
+    boolean isShowingGlobalPersonList();
+
     /**
      * Returns the user prefs' address book file path.
      */

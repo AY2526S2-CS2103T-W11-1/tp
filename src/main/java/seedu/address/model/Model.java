@@ -151,6 +151,20 @@ public interface Model {
     }
 
     /**
+     * Returns true if the app is currently showing the global person list while not inside an event.
+     */
+    default boolean isShowingGlobalPersonList() {
+        return false;
+    }
+
+    /**
+     * Switches the non-event view to the global person list.
+     */
+    default void showGlobalPersonList() {
+        // Default is a no-op for test stubs.
+    }
+
+    /**
      * Enters the context of the given event so that address-book commands apply to its participants.
      */
     default void enterEvent(Event event) {
