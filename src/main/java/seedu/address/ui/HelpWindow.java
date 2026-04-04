@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.stage.Stage;
+import seedu.address.commons.core.ThemeMode;
 import seedu.address.commons.core.LogsCenter;
 
 /**
@@ -42,6 +43,13 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow() {
         this(new Stage());
+    }
+
+    /**
+     * Applies the selected theme to the help window scene.
+     */
+    public void applyTheme(ThemeMode themeMode) {
+        ThemeStyles.applyTheme(getRoot().getScene().getStylesheets(), themeMode);
     }
 
     /**
