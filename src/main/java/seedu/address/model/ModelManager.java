@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -25,8 +26,7 @@ public class ModelManager implements Model {
     private FilteredList<Person> filteredPersons;
     private final EventBook eventBook;
     private Event activeEvent;
-    private boolean isShowingGlobalPersonList;
-
+    private Person personToView;
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -219,7 +219,7 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
 
-    //=========== EventBook ====================================================================================
+    //============================================ EventBook ===========================================================
 
     @Override
     public void addEvent(Event event) {
@@ -267,33 +267,16 @@ public class ModelManager implements Model {
         return eventBook.getEventList();
     }
 
-    /**
-     * Builds a de-duplicated snapshot of all persons that should appear in the global list view.
-     * Persons from the root address book are kept first, then participants from every event are added
-     * if they are not already present.
-     */
-    private ObservableList<Person> buildGlobalPersonListSnapshot() {
-        AddressBook aggregatedAddressBook = new AddressBook(addressBook);
+    //=========== View Person ==================================================================================
 
-        for (Event event : eventBook.getEventList()) {
-            for (Person participant : event.getParticipants().getPersonList()) {
-                if (!aggregatedAddressBook.hasPerson(participant)) {
-                    aggregatedAddressBook.addPerson(participant);
-                }
-            }
-        }
-
-        return aggregatedAddressBook.getPersonList();
+    @Override
+    public Optional<Person> getPersonToView() {
+        return Optional.ofNullable(personToView);
     }
 
-    /**
-     * Rebuilds the global person snapshot when the UI is currently showing the global list view.
-     */
-    private void refreshGlobalPersonListIfShowing() {
-        if (isShowingGlobalPersonList && activeEvent == null) {
-            filteredPersons = new FilteredList<>(buildGlobalPersonListSnapshot());
-            updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        }
+    @Override
+    public void setPersonToView(Optional<Person> person) {
+        requireNonNull(person);
+        this.personToView = person.orElse(null);
     }
-
 }

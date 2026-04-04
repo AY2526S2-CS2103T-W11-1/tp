@@ -1,6 +1,7 @@
 package seedu.address.logic;
 
 import java.nio.file.Path;
+import java.util.Optional;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
@@ -23,6 +24,12 @@ public interface Logic {
      * @throws ParseException If an error occurs during parsing.
      */
     CommandResult execute(String commandText) throws CommandException, ParseException;
+
+    /**
+     * Updates the currently filtered list using live search keywords.
+     * This bypasses command execution and does not write to storage.
+     */
+    void updateLiveSearch(String queryText);
 
     /**
      * Returns the AddressBook.
@@ -57,4 +64,9 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+    /**
+     * Returns the person to view.
+     */
+    Optional<Person> getPersonToView();
 }

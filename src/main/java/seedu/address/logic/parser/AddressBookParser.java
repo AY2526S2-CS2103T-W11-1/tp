@@ -25,6 +25,8 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.LeaveEventCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SearchCommand;
+import seedu.address.logic.commands.StatisticsCommand;
+import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -90,6 +92,9 @@ public class AddressBookParser {
             return new ListCommand();
 
         case ExitCommand.COMMAND_WORD:
+            if (!arguments.trim().isEmpty()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExitCommand.MESSAGE_USAGE));
+            }
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
@@ -99,15 +104,22 @@ public class AddressBookParser {
             return new EnterEventCommandParser().parse(arguments);
 
         case LeaveEventCommand.COMMAND_WORD:
-            return new LeaveEventCommand();
+            return new LeaveEventCommandParser().parse(arguments);
 
         case FilterCommand.COMMAND_WORD:
             return new FilterCommandParser().parse(arguments);
+
         case CheckInCommand.COMMAND_WORD:
             return new CheckInCommandParser().parse(arguments);
 
         case AssignTeamCommand.COMMAND_WORD:
             return new AssignTeamCommandParser().parse(arguments);
+
+        case StatisticsCommand.COMMAND_WORD:
+            return new StatisticsCommand();
+
+        case ViewCommand.COMMAND_WORD:
+            return new ViewCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
