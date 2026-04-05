@@ -7,14 +7,19 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.ThemeMode;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.SearchCommand;
@@ -44,6 +49,7 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private StatisticsPanel statisticsPanel;
+    private PersonDetailPanel personDetailPanel;
     private OnboardingPanel onboardingPanel;
     private OnboardingCoordinator onboardingCoordinator;
 
@@ -74,6 +80,12 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private StackPane statisticsPanelPlaceholder;
 
+    @FXML
+    private SplitPane mainSplitPane;
+
+    @FXML
+    private StackPane singleListPlaceholder;
+
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
@@ -90,6 +102,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        applyTheme(logic.getThemeMode());
     }
 
     public Stage getPrimaryStage() {
@@ -113,14 +126,12 @@ public class MainWindow extends UiPart<Stage> {
          * is fixed in later version of SDK.
          *
          * According to the bug report, TextInputControl (TextField, TextArea) will
-         * consume function-key events. Because CommandBox contains a TextField, and
-         * ResultDisplay contains a TextArea, thus some accelerators (e.g F1) will
-         * not work when the focus is in them because the key event is consumed by
-         * the TextInputControl(s).
+         * consume function-key events. CommandBox contains a TextField, so some
+         * accelerators (e.g F1) will not work when focus is in it.
          *
          * For now, we add following event filter to capture such key events and open
          * help window purposely so to support accelerators even when focus is
-         * in CommandBox or ResultDisplay.
+         * in CommandBox.
          */
         getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (event.getTarget() instanceof TextInputControl && keyCombination.match(event)) {
@@ -135,10 +146,10 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         eventListPanel = new EventListPanel(logic.getFilteredEventList());
-        eventListPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
+
+        personDetailPanel = new PersonDetailPanel();
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -216,17 +227,44 @@ public class MainWindow extends UiPart<Stage> {
 
     private void updateModeView() {
         boolean inParticipantsMode = logic.isInEventParticipantsMode();
+        boolean showDetail = inParticipantsMode && logic.getPersonToView().isPresent();
 
-        personListPanelPlaceholder.setVisible(inParticipantsMode);
-        personListPanelPlaceholder.setManaged(inParticipantsMode);
+        personListPanel.setPersonList(logic.getFilteredPersonList());
+        personListPanel.setCompactMode(inParticipantsMode);
 
-        eventListPanelPlaceholder.setVisible(!inParticipantsMode);
-        eventListPanelPlaceholder.setManaged(!inParticipantsMode);
+        if (showDetail) {
+            mainSplitPane.setVisible(true);
+            mainSplitPane.setManaged(true);
+            singleListPlaceholder.setVisible(false);
+            singleListPlaceholder.setManaged(false);
 
-        // Person list data backing changes when switching events.
-        if (personListPanel != null) {
-            personListPanel.setPersonList(logic.getFilteredPersonList());
+            reparent(personListPanel.getRoot(), personListPanelPlaceholder);
+            eventListPanelPlaceholder.getChildren().setAll(personDetailPanel.getRoot());
+            personDetailPanel.setPerson(logic.getPersonToView().get());
+        } else {
+            mainSplitPane.setVisible(false);
+            mainSplitPane.setManaged(false);
+            personListPanelPlaceholder.getChildren().clear();
+            eventListPanelPlaceholder.getChildren().clear();
+
+            singleListPlaceholder.setVisible(true);
+            singleListPlaceholder.setManaged(true);
+
+            if (inParticipantsMode) {
+                reparent(personListPanel.getRoot(), singleListPlaceholder);
+            } else {
+                reparent(eventListPanel.getRoot(), singleListPlaceholder);
+            }
         }
+    }
+
+    /** Moves {@code node} into {@code newParent} as its only child (removes from prior parent if any). */
+    private static void reparent(Node node, Pane newParent) {
+        Parent oldParent = node.getParent();
+        if (oldParent instanceof Pane oldPane) {
+            oldPane.getChildren().remove(node);
+        }
+        newParent.getChildren().setAll(node);
     }
 
     private void handleCommandTextChanged(String commandText) {
@@ -294,24 +332,19 @@ public class MainWindow extends UiPart<Stage> {
         statisticsPanel.update(summary);
         statisticsPanelPlaceholder.getChildren().setAll(statisticsPanel.getRoot());
 
-        // Show statistics full-page; hide events/participants lists (same content area as StackPane siblings).
-        eventListPanelPlaceholder.setVisible(false);
-        eventListPanelPlaceholder.setManaged(false);
-        personListPanelPlaceholder.setVisible(false);
-        personListPanelPlaceholder.setManaged(false);
+        // Full-page statistics over list area.
+        mainSplitPane.setVisible(false);
+        mainSplitPane.setManaged(false);
+        singleListPlaceholder.setVisible(false);
+        singleListPlaceholder.setManaged(false);
         statisticsPanelPlaceholder.setVisible(true);
         statisticsPanelPlaceholder.setManaged(true);
     }
 
-    /** Shows the person list panel. */
+    /** Hides the full-page statistics overlay (list layout was updated before this runs). */
     private void handleShowPersonList() {
         statisticsPanelPlaceholder.setVisible(false);
         statisticsPanelPlaceholder.setManaged(false);
-
-        updateModeView();
-
-        personListPanelPlaceholder.getChildren().clear();
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
     }
 
     public PersonListPanel getPersonListPanel() {
@@ -331,6 +364,7 @@ public class MainWindow extends UiPart<Stage> {
             processOnboardingAfterCommand(commandText, true);
 
             updateModeView();
+            commandResult.getThemeMode().ifPresent(this::applyTheme);
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
@@ -353,5 +387,11 @@ public class MainWindow extends UiPart<Stage> {
             processOnboardingAfterCommand(commandText, false);
             throw e;
         }
+    }
+
+    private void applyTheme(ThemeMode themeMode) {
+        logic.setThemeMode(themeMode);
+        ThemeStyles.applyTheme(primaryStage.getScene().getStylesheets(), themeMode);
+        helpWindow.applyTheme(themeMode);
     }
 }

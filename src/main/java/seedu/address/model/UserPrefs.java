@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.util.Objects;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.ThemeMode;
 
 /**
  * Represents User's preferences.
@@ -16,6 +17,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     private GuiSettings guiSettings = new GuiSettings();
     private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
     private boolean onboardingCompleted;
+    private ThemeMode themeMode = ThemeMode.DARK;
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -38,6 +40,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         setGuiSettings(newUserPrefs.getGuiSettings());
         setAddressBookFilePath(newUserPrefs.getAddressBookFilePath());
         setOnboardingCompleted(newUserPrefs.isOnboardingCompleted());
+        setThemeMode(newUserPrefs.getThemeMode());
     }
 
     public GuiSettings getGuiSettings() {
@@ -67,6 +70,15 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         this.onboardingCompleted = onboardingCompleted;
     }
 
+    public ThemeMode getThemeMode() {
+        return themeMode;
+    }
+
+    public void setThemeMode(ThemeMode themeMode) {
+        requireNonNull(themeMode);
+        this.themeMode = themeMode;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -81,12 +93,13 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         UserPrefs otherUserPrefs = (UserPrefs) other;
         return guiSettings.equals(otherUserPrefs.guiSettings)
                 && addressBookFilePath.equals(otherUserPrefs.addressBookFilePath)
-                && onboardingCompleted == otherUserPrefs.onboardingCompleted;
+                && onboardingCompleted == otherUserPrefs.onboardingCompleted
+                && themeMode == otherUserPrefs.themeMode;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(guiSettings, addressBookFilePath, onboardingCompleted);
+        return Objects.hash(guiSettings, addressBookFilePath, onboardingCompleted, themeMode);
     }
 
     @Override
@@ -95,6 +108,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         sb.append("Gui Settings : " + guiSettings);
         sb.append("\nLocal data file location : " + addressBookFilePath);
         sb.append("\nOnboarding completed : " + onboardingCompleted);
+        sb.append("\nTheme mode : " + themeMode);
         return sb.toString();
     }
 

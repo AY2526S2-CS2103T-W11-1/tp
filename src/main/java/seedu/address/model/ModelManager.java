@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.ThemeMode;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 
@@ -25,7 +27,7 @@ public class ModelManager implements Model {
     private FilteredList<Person> filteredPersons;
     private final EventBook eventBook;
     private Event activeEvent;
-
+    private Person personToView;
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -73,6 +75,17 @@ public class ModelManager implements Model {
     public void setGuiSettings(GuiSettings guiSettings) {
         requireNonNull(guiSettings);
         userPrefs.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public ThemeMode getThemeMode() {
+        return userPrefs.getThemeMode();
+    }
+
+    @Override
+    public void setThemeMode(ThemeMode themeMode) {
+        requireNonNull(themeMode);
+        userPrefs.setThemeMode(themeMode);
     }
 
     @Override
@@ -245,5 +258,16 @@ public class ModelManager implements Model {
         return eventBook.getEventList();
     }
 
+    //=========== View Person ==================================================================================
 
+    @Override
+    public Optional<Person> getPersonToView() {
+        return Optional.ofNullable(personToView);
+    }
+
+    @Override
+    public void setPersonToView(Optional<Person> person) {
+        requireNonNull(person);
+        this.personToView = person.orElse(null);
+    }
 }

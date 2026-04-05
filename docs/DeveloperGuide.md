@@ -284,7 +284,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * Manages hackathon team assignments and participant skill tracking
 * Values data accuracy and quick error correction during live events
 
-**Value proposition**: 
+**Value proposition**:
 
 Enable tech event organizers to manage participants. Optimized for live event scenarios with keyboard-first commands for rapid check-ins, instant search, real-time filtering, and on-the-spot team assignments—all without requiring an internet connection.
 
@@ -344,9 +344,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3a. The given index is invalid.
 
     * 3a1. TeamEventPro shows an error message indicating the index is invalid.
-       
+
       3a2. Organizer enters a new check-in command with a valid index.
-      
+  
       Steps resume from step 4.
 
 **Use Case: UC02 - Assign a participant to a team**
@@ -373,9 +373,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3a. The given index is invalid.
 
     * 3a1. TeamEventPro shows an error message indicating the index is invalid.
-       
+
       3a2. Organizer enters a new team assignment command with a valid index.
-      
+
       Steps resume from step 4.
 
 * 3b. The given team name format is invalid (e.g., contains special characters).
@@ -410,12 +410,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3a. The given index is invalid.
 
     * 3a1. TeamEventPro shows an error message indicating the index is invalid.
-       
-      3a2. Organizer enters a new new delete command with a valid index.
-      
-      Steps resume from step 4.
 
-       
+      3a2. Organizer enters a new new delete command with a valid index.
+
+      Steps resume from step 4.
 
 *{More to be added}*
 
@@ -484,6 +482,46 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
+
+1. _{ more test cases …​ }_
+
+### Filtering applicants
+
+1. Filtering while inside an event
+
+   1. Prerequisites: Launch the app, select an event with `enter event INDEX` so the participant list is shown. Ensure the list has a mix of RSVP values, tags, team assignments, and check-in states (use sample data or add/edit participants as needed).
+
+   1. Test case: `filter r/yes`<br>
+      Expected: Only participants whose RSVP is “yes” remain visible; the status message shows how many persons are listed; list updates immediately.
+
+   1. Test case: `filter t/` followed by a tag that at least one participant has (e.g. `filter t/python` if such a tag exists).<br>
+      Expected: Only participants with that tag are shown; count in the message matches the visible list.
+
+   1. Test case: `filter team/TEAMNAME` where `TEAMNAME` matches an assigned team.<br>
+      Expected: Only participants on that team are shown.
+
+   1. Test case: `filter checkin/yes` or `filter checkin/no` (values as supported by the app).<br>
+      Expected: List narrows to checked-in or not checked-in participants accordingly.
+
+   1. Test case: `list` after a successful filter.<br>
+      Expected: Full participant list for the current event is shown again (filter predicate cleared as per normal `list` behavior).
+
+1. Invalid filter input
+
+   1. Prerequisites: Same as above—must be inside an event with participants listed.
+
+   1. Test case: `filter` with no arguments, or with two criteria in one command (e.g. `filter r/yes t/python`).<br>
+      Expected: No change to the filtered list (or error message); user sees invalid command / usage feedback.
+
+   1. Test case: `filter r/invalid` (or other malformed RSVP value).<br>
+      Expected: Parse error; list unchanged.
+
+1. Filtering without entering an event first
+
+   1. Prerequisites: Launch the app but do **not** run `enter event`; stay at the event selection view if applicable.
+
+   1. Test case: `filter r/yes`<br>
+      Expected: Command fails with a message indicating the user must enter an event first; participant list not updated.
 
 1. _{ more test cases …​ }_
 
