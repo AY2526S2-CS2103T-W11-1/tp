@@ -5,5 +5,5 @@
 
 <StackPane alignment="TOP_LEFT" styleClass="stack-pane" xmlns="http://javafx.com/javafx/17"
     xmlns:fx="http://javafx.com/fxml/1">
-  <Label fx:id="resultDisplay" styleClass="result-display" maxWidth="Infinity" />
+  <Label fx:id="resultDisplay" styleClass="result-display" maxWidth="Infinity" wrapText="true" />
 </StackPane>
