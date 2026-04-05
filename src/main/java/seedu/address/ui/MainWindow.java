@@ -157,6 +157,8 @@ public class MainWindow extends UiPart<Stage> {
 
     private void updateModeView() {
         boolean inParticipantsMode = logic.isInEventParticipantsMode();
+        boolean showingGlobalPersonList = logic.isShowingGlobalPersonList();
+        boolean showingPersonList = inParticipantsMode || showingGlobalPersonList;
         boolean showDetail = inParticipantsMode && logic.getPersonToView().isPresent();
 
         personListPanel.setPersonList(logic.getFilteredPersonList());
@@ -180,7 +182,7 @@ public class MainWindow extends UiPart<Stage> {
             singleListPlaceholder.setVisible(true);
             singleListPlaceholder.setManaged(true);
 
-            if (inParticipantsMode) {
+            if (showingPersonList) {
                 reparent(personListPanel.getRoot(), singleListPlaceholder);
             } else {
                 reparent(eventListPanel.getRoot(), singleListPlaceholder);

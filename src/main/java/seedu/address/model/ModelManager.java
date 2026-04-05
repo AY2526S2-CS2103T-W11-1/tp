@@ -28,6 +28,7 @@ public class ModelManager implements Model {
     private final EventBook eventBook;
     private Event activeEvent;
     private Person personToView;
+    private boolean showingGlobalPersonList;
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -40,6 +41,7 @@ public class ModelManager implements Model {
         this.eventBook = new EventBook(eventBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        showingGlobalPersonList = false;
     }
 
     /** Creates a ModelManager with empty data. */
@@ -135,6 +137,9 @@ public class ModelManager implements Model {
     public void addPerson(Person person) {
         if (activeEvent != null) {
             activeEvent.addParticipant(person);
+            if (!addressBook.hasPerson(person)) {
+                addressBook.addPerson(person);
+            }
         } else {
             addressBook.addPerson(person);
         }
@@ -184,9 +189,25 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean isShowingGlobalPersonList() {
+        return showingGlobalPersonList;
+    }
+
+    @Override
+    public void showGlobalPersonList() {
+        if (activeEvent != null) {
+            return;
+        }
+        showingGlobalPersonList = true;
+        filteredPersons = new FilteredList<>(addressBook.getPersonList());
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
     public void enterEvent(Event event) {
         requireNonNull(event);
         activeEvent = event;
+        showingGlobalPersonList = false;
         filteredPersons = new FilteredList<>(activeEvent.getParticipants().getPersonList());
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
@@ -194,6 +215,7 @@ public class ModelManager implements Model {
     @Override
     public void leaveEvent() {
         activeEvent = null;
+        showingGlobalPersonList = false;
         filteredPersons = new FilteredList<>(addressBook.getPersonList());
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
@@ -212,7 +234,8 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredPersons.equals(otherModelManager.filteredPersons)
+                && showingGlobalPersonList == otherModelManager.showingGlobalPersonList;
     }
 
     //============================================ EventBook ===========================================================
