@@ -120,6 +120,8 @@
         "leaving-an-event-leave": "Leaving an event : leave",
         "adding-an-applicant-add": "Adding an applicant: add",
         "listing-all-applicants-list": "Listing all applicants : list",
+        "importing-applicants-from-csv-import": "Importing applicants from CSV : import",
+        "exporting-applicants-to-csv-export": "Exporting applicants to CSV : export",
         "editing-an-applicant-edit": "Editing an applicant : edit",
         "assigning-a-team-assign": "Assigning a team : assign",
         "filtering-applicants-filter": "Filtering applicants : filter",
