@@ -37,7 +37,7 @@ public class PersonMatchesFilterPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
-        boolean matchesRsvp = rsvpFilter.isEmpty() || matchesRsvp(person, rsvpFilter.get());    
+        boolean matchesRsvp = rsvpFilter.isEmpty() || matchesRsvp(person, rsvpFilter.get());
         boolean matchesTags = tagFilter.isEmpty() || matchesTags(person, tagFilter);
         boolean matchesTeam = teamFilter.isEmpty() || matchesTeam(person, teamFilter.get());
         boolean matchesCheckin = checkinFilter.isEmpty() || matchesCheckin(person, checkinFilter.get());
@@ -65,7 +65,7 @@ public class PersonMatchesFilterPredicate implements Predicate<Person> {
 
     private boolean matchesCheckin(Person person, Attendance checkinStatus) {
         return person.getCheckInStatus().equals(checkinStatus);
-    }   
+    }
 
     @Override
     public boolean equals(Object other) {
