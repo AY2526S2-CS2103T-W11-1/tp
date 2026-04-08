@@ -135,53 +135,144 @@ checkin 3
 Used to filter the participant list using one criterion at a time.
 
 #### Format
+<tabs>
+<tab header="RSVP">
+
 `filter r/[RSVP_STATUS]`
+
+</tab>
+<tab header="Tag">
+
 `filter t/[TAG]`
+
+</tab>
+<tab header="Team">
+
 `filter team/[TEAM NAME]`
+
+</tab>
+<tab header="Check-in">
+
 `filter checkin/[yes|no]`
 
+</tab>
+</tabs>
+
 #### Example Usage
-`filter team/Alpha`
+<tabs>
+<tab header="RSVP">
+
+```
+filter r/yes
+```
+![Command](images/filter/rsvp_command.png)
+
+</tab>
+<tab header="Tag">
+
+```
+filter t/python
+```
+![Command](images/filter/tag_command.png)
+
+</tab>
+<tab header="Team">
+
+```
+filter team/Alpha
+```
+![Command](images/filter/team_command.png)
+
+</tab>
+<tab header="Check-in">
+
+```
+filter checkin/yes
+```
+![Command](images/filter/checkin_command.png)
+
+</tab>
+</tabs>
 
 #### Successful Execution
-Matching applicants are shown in the participant list.
+<tabs>
+<tab header="RSVP">
+
+![Result](images/filter/rsvp_output.png)
+
+</tab>
+<tab header="Tag">
+
+![Result](images/filter/tag_output.png)
+
+</tab>
+<tab header="Team">
+
+![Result](images/filter/team_output.png)
+
+</tab>
+<tab header="Check-in">
+
+![Result](images/filter/checkin_output.png)
+
+</tab>
+</tabs>
 
 #### Notes
 - Can only be used inside an event.
 - Supported prefixes are `r/`, `t/`, `team/`, and `checkin/`.
+- Only one filter criterion can be used per command (e.g., `filter r/yes t/python` is invalid).
+- Filtering is not cumulative across commands; each `filter` command replaces the previous filter/search.
+- `checkin/` accepts only `yes` or `no` (it is not case sensitive).
 
 ### 3.2 View command
 
 Used to show the details of a selected applicant.
 
 #### Format
-`view [INDEX]`
+```
+view [INDEX]
+```
 
 #### Example Usage
-`view 1`
+```
+view 1
+```
+![Command](images/view/command.png)
 
 #### Successful Execution
-`Viewed Applicant [1]`
+![Result](images/view/output.png)
+
 
 #### Notes
-- Can only be used inside an event.
-- Index must be a positive integer.
+- This command can only be used inside an event.
+- `INDEX` must be a positive integer.
+- The `INDEX` must refer to an applicant currently shown in the displayed list, including filtered or searched results.
+- The command fails if the `INDEX` is invalid or out of range.
 
 ### 3.3 Statistics command
 
 Used to display the current event's participant statistics summary.
 
 #### Format
-`statistics`
+```
+statistics
+```
 
 #### Example Usage
-`statistics`
+```
+statistics
+```
+![Command](images/statistics/command.png)
 
 #### Successful Execution
-`Showing the event's statistics summary.`
+![Result](images/statistics/output.png)
 
 #### Notes
 - Can only be used inside an event.
+- This is a read-only command; it does not edit participant data.
+- If you want to return to normal participant list operations, use commands like `list`, `filter`, `search`, etc.
+- The command format is `statistics` only (no index or prefixes needed).
 
 ---
 
