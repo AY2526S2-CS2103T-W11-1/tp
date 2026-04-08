@@ -85,10 +85,14 @@ Used to enter an event and switch into participant-management mode for that even
 `enter event [INDEX]`
 
 #### Example Usage
-`enter event 1`
+```
+enter event 1
+```
+![Command](images/enter-event/command.png)
 
 #### Successful Execution
-`Entered event: ...`
+
+![Result](images/enter-event/result.png)
 
 #### Notes
 - Can only be used outside an event.
@@ -107,10 +111,13 @@ Used to close the application.
 `exit`
 
 #### Example Usage
-`exit`
+```
+exit
+```
+![Command](images/exit/command.png)
 
 #### Successful Execution
-`Exiting Address Book as requested ...`
+The application is exited.
 
 #### Notes
 - This command only succeeds outside an event.
@@ -121,4 +128,5 @@ Used to close the application.
 ## 5. Navigation
 
 - [Back to Introduction, Modes, and Common Commands](UG.md)
+- [Back to Common Commands](UserGuideCommonCommands.md)
 - [Go to Participant Commands](UserGuideParticipants.md)

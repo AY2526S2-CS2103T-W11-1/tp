@@ -113,10 +113,14 @@ Used to mark an applicant as checked in.
 `checkin [INDEX]`
 
 #### Example Usage
-`checkin 1`
+```
+checkin 3
+```
+![Command](images/checkin/command.png)
 
 #### Successful Execution
-`Checked-in person: ...`
+
+![Result](images/checkin/result.png)
 
 #### Notes
 - Can only be used inside an event.
@@ -234,17 +238,23 @@ Used to leave the current event and return to the event list.
 `leave event`
 
 #### Example Usage
-`leave event`
+```
+leave event
+```
+![Command](images/leave-event/command.png)
 
 #### Successful Execution
-`Returned to event list`
+
+![Result](images/leave-event/result.png)
 
 #### Notes
 - Can only be used inside an event.
+- Ensure that there is no space after `event`.
 
 ---
 
 ## 6. Navigation
 
 - [Back to Introduction, Modes, and Common Commands](UG.md)
+- [Back to Common Commands](UserGuideCommonCommands.md)
 - [Back to Event Commands](UserGuideEvents.md)

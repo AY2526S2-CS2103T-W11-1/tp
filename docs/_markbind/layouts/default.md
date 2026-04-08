@@ -28,11 +28,16 @@
       <site-nav>
 * [Home]({{ baseUrl }}/index.html)
 * [User Guide]({{ baseUrl }}/UG.html) :expanded:
-  * [Introduction, Modes, and Common Commands]({{ baseUrl }}/UG.html)
+  * [Introduction and App Modes]({{ baseUrl }}/UG.html)
     * [About TeamEventPro]({{ baseUrl }}/UG.html#1-about-teameventpro)
     * [Quick Start]({{ baseUrl }}/UG.html#2-quick-start)
     * [Understanding App Modes]({{ baseUrl }}/UG.html#3-understanding-app-modes)
-    * [Commands Available in Both Modes]({{ baseUrl }}/UG.html#5-commands-available-in-both-modes)
+  * [Common Commands]({{ baseUrl }}/UserGuideCommonCommands.html)
+    * [Commands Available in Both Modes]({{ baseUrl }}/UserGuideCommonCommands.html#1-commands-available-in-both-modes)
+    * [Help command]({{ baseUrl }}/UserGuideCommonCommands.html#2-help-command)
+    * [List command]({{ baseUrl }}/UserGuideCommonCommands.html#3-list-command)
+    * [Search command]({{ baseUrl }}/UserGuideCommonCommands.html#4-search-command)
+    * [Switch Mode command]({{ baseUrl }}/UserGuideCommonCommands.html#5-switch-mode-command)
   * [Event Commands]({{ baseUrl }}/UserGuideEvents.html)
     * [Event Creation and Setup]({{ baseUrl }}/UserGuideEvents.html#1-event-creation-and-setup)
     * [Event Maintenance]({{ baseUrl }}/UserGuideEvents.html#2-event-maintenance)
