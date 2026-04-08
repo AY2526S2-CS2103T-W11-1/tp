@@ -116,10 +116,6 @@
         "3-2-inside-an-event": "3.2 Inside an event",
         "4-notes-about-command-format": "4. Notes About Command Format",
         "5-commands-available-in-both-modes": "5. Commands Available in Both Modes",
-        "5-1-help-command": "5.1 Help command",
-        "5-2-list-command": "5.2 List command",
-        "5-3-switch-mode-command": "5.3 Switch Mode command",
-        "5-4-search-command": "5.4 Search command",
         "6-next-sections": "6. Next Sections"
       },
       "headingKeywords": {}
@@ -156,6 +152,36 @@
         "faq": "FAQ",
         "known-issues": "Known issues",
         "command-summary": "Command summary"
+      },
+      "headingKeywords": {}
+    },
+    {
+      "src": "UserGuideCommonCommands.md",
+      "title": "User Guide - Common Commands",
+      "headings": {
+        "common-commands": "Common Commands",
+        "1-commands-available-in-both-modes": "1. Commands Available in Both Modes",
+        "2-help-command": "2. Help command",
+        "format": "Format",
+        "example-usage": "Example Usage",
+        "successful-execution": "Successful Execution",
+        "notes": "Notes",
+        "3-list-command": "3. List command",
+        "format-2": "Format",
+        "example-usage-2": "Example Usage",
+        "successful-execution-2": "Successful Execution",
+        "notes-2": "Notes",
+        "4-search-command": "4. Search command",
+        "format-3": "Format",
+        "example-usage-3": "Example Usage",
+        "successful-execution-3": "Successful Execution",
+        "notes-3": "Notes",
+        "5-switch-mode-command": "5. Switch Mode command",
+        "format-4": "Format",
+        "example-usage-4": "Example Usage",
+        "successful-execution-4": "Successful Execution",
+        "notes-4": "Notes",
+        "6-navigation": "6. Navigation"
       },
       "headingKeywords": {}
     },
