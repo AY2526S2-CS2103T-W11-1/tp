@@ -33,11 +33,7 @@ public class PersonListPanel extends UiPart<Region> {
     }
 
     void setHighlightKeywords(List<String> keywords) {
-        List<String> normalizedKeywords = List.copyOf(keywords);
-        if (highlightKeywords.equals(normalizedKeywords)) {
-            return;
-        }
-        highlightKeywords = normalizedKeywords;
+        highlightKeywords = List.copyOf(keywords);
         personListView.refresh();
     }
 
