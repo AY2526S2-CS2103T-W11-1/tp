@@ -253,7 +253,7 @@ filter checkin/yes
 - Supported prefixes are `r/`, `t/`, `team/`, and `checkin/`.
 - Only one filter criterion can be used per command (e.g., `filter r/yes t/python` is invalid).
 - Filtering is not cumulative across commands; each `filter` command replaces the previous filter/search.
-- `checkin/` accepts `yes`, `no`, `checked-in`, `not checked-in`, `true`, or `false` (case-insensitive).
+- `checkin/` accepts `yes` or `no`(case-insensitive).
 
 ### 3.2 View command
 
