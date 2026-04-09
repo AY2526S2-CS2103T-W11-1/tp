@@ -63,8 +63,12 @@
 * [Developer Guide]({{ baseUrl }}/DeveloperGuide.html) :expanded:
   * [Acknowledgements]({{ baseUrl }}/DeveloperGuide.html#acknowledgements)
   * [Setting Up]({{ baseUrl }}/DeveloperGuide.html#setting-up-getting-started)
-  * [Design]({{ baseUrl }}/DeveloperGuide.html#design)
+    * [Design]({{ baseUrl }}/DeveloperGuide.html#design)
   * [Implementation]({{ baseUrl }}/DeveloperGuide.html#implementation)
+    * [Add Event Feature]({{ baseUrl }}/DeveloperGuide.html#add-event-feature)
+    * [Add Participant Feature]({{ baseUrl }}/DeveloperGuide.html#add-participant-feature)
+    * [Edit Participant Feature]({{ baseUrl }}/DeveloperGuide.html#edit-participant-feature)
+    * [Filter Participants]({{ baseUrl }}/DeveloperGuide.html#filter-participants)
   * [Documentation, logging, testing, configuration, dev-ops]({{ baseUrl }}/DeveloperGuide.html#documentation-logging-testing-configuration-dev-ops)
   * [Appendix: Requirements]({{ baseUrl }}/DeveloperGuide.html#appendix-requirements)
   * [Appendix: Instructions for manual testing]({{ baseUrl }}/DeveloperGuide.html#appendix-instructions-for-manual-testing)

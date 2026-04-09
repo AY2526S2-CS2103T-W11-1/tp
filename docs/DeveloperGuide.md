@@ -65,16 +65,16 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g. `CommandBox`, `ResultDisplay`, `PersonListPanel`, `EventListPanel`, `StatisticsPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2526S2-CS2103T-W11-1/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2526S2-CS2103T-W11-1/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Person` and `Event` objects residing in the `Model`.
 
 ### Logic component
 
@@ -146,8 +146,8 @@ The `Model` component,
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* can save address book data, event book data, and user preference data in JSON format, and read them back into corresponding objects.
+* inherits from `AddressBookStorage`, `EventBookStorage`, and `UserPrefsStorage`, which means it can be treated as any one of them when only one storage responsibility is needed.
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
@@ -507,13 +507,21 @@ _{Explain here how the data archiving feature will be implemented}_
 ## **Acknowledgements**
 
 ### Anugrah Bagla
-
+Used Cursor and Codex for 
+* Understanding the codebase to implement features.
+* Design multiple features such as `enter event`, `checkin` etc.
+* Writing test cases for the features.
+* Debugging errors.
 
 ### Zhou Jinhao
 
 
 ### Debopam Roy
-
+Used Claude (Claude Code) for:
+* Understanding the codebase architecture while implementing the addevent, add participant, and edit participant commands.
+* Designing and refining the duplicate participant detection logic (Person#isSamePerson()).
+* Debugging issues and performing error checking, including Checkstyle violations and failing unit tests.
+* Reviewing code and documentation quality, including alpha testing bugs and peer PR code reviews.
 
 ### Han Shangda
 
@@ -541,15 +549,14 @@ Used Cursor (auto mode) for:
 
 **Target user profile**:
 
-* Tech meetup organizers managing small-to-medium events (20–150 participants) in Singapore
-* Manages multiple events per month with varying participant lists
-* Needs to perform live check-ins and track real-time attendance during events
-* Prefers desktop applications for stability and offline capability during events
-* Types fast and prefers keyboard shortcuts over mouse navigation
-* Comfortable with command-line interfaces and text-based input
-* Requires instant filtering and searching capabilities (by RSVP, attendance, team, dietary needs)
-* Manages hackathon team assignments and participant skill tracking
-* Values data accuracy and quick error correction during live events
+* Tech meetup organizers managing small-to-medium events (20–150 participants).
+* Manages multiple events per month with varying participant lists.
+* Needs to perform live check-ins and track real-time attendance during events.
+* Prefers desktop applications for stability and offline capability during events.
+* Types fast and prefers keyboard shortcuts over mouse navigation.
+* Requires instant filtering and searching capabilities (by RSVP, attendance, team, dietary needs).
+* Manages hackathon team assignments and participant skill tracking.
+* Values data accuracy and quick error correction during live events.
 
 **Value proposition**:
 
