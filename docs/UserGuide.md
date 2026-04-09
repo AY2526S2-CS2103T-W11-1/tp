@@ -21,7 +21,10 @@ your event management tasks done faster than traditional GUI apps.
   **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 2. Download the latest `.jar` file from [Releases](https://github.com/AY2526S2-CS2103T-W11-1/tp/releases).
 3. Copy the file to the folder you want to use as the *home folder* for TeamEventPro. 
-4. Open a command terminal, `cd` into the folder containing the jar file, and run `java -jar addressbook.jar`.  
+4. Open a command terminal, `cd` into the folder containing the jar file, and run `java -jar addressbook.jar`.
+   > **Note:** Double-clicking the jar file may not work on all systems. If the app does not launch, use the terminal command above.
+   > **Note:** Ensure the folder is not write-protected. TeamEventPro needs to write data files to its home folder.
+
 
   A GUI similar to the below should appear in a few seconds.   
 
@@ -99,8 +102,10 @@ Adds an event to the event book.
 
 Format: `addevent n/NAME d/DATE [l/LOCATION] [desc/DESCRIPTION]`
 
+- `NAME` must start with an alphanumeric character and can only contain alphanumeric characters and spaces. It must not be blank.
 - `DATE` must be in `YYYY-MM-DD` format.
 - You must be in the event list view to use this command.
+- Duplicate events (same name) are not allowed.
 
 Examples:
 
@@ -374,7 +379,7 @@ TeamEventPro data are saved to the hard disk automatically after any command tha
 
 ### Editing the data file
 
-TeamEventPro data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users can update data directly by editing that data file.
+TeamEventPro data are saved automatically as a JSON file `[JAR file location]/data/eventbook.json`. Advanced users can update data directly by editing that data file.
 
 
 
