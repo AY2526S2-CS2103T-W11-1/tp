@@ -9,42 +9,49 @@ pageNav: 3
 ## Guide Contents
 
 - [About TeamEventPro](#1-about-teameventpro)
-- [Getting Started](UserGuideGettingStarted.md)
-- [Command Fundamentals](UserGuideCommandFundamentals.md)
-- [Common Commands](UserGuideCommonCommands.md)
-  - [Help : `help`](UserGuideCommonCommands.md#2-help-command)
-  - [List : `list`](UserGuideCommonCommands.md#3-list-command)
-  - [Search : `search`](UserGuideCommonCommands.md#4-search-command)
-  - [Switch Mode : `switchmode`](UserGuideCommonCommands.md#5-switch-mode-command)
-- [Event Commands](UserGuideEvents.md)
-  - [Add Event : `addevent`](UserGuideEvents.md#11-add-event-command)
-  - [Edit Event : `editevent`](UserGuideEvents.md#21-edit-event-command)
-  - [Delete Event : `deleteevent`](UserGuideEvents.md#22-delete-event-command)
-  - [Enter Event : `enter event`](UserGuideEvents.md#31-enter-event-command)
-  - [Exit : `exit`](UserGuideEvents.md#41-exit-command)
-- [Participant Commands](UserGuideParticipants.md)
-  - [Add Participant : `add`](UserGuideParticipants.md#11-add-command)
-  - [Edit Participant : `edit`](UserGuideParticipants.md#12-edit-command)
-  - [Delete Participant : `delete`](UserGuideParticipants.md#13-delete-command)
-  - [Clear Participants : `clear`](UserGuideParticipants.md#14-clear-command)
-  - [Assign Team : `assign`](UserGuideParticipants.md#21-assign-team-command)
-  - [Check-In : `checkin`](UserGuideParticipants.md#22-check-in-command)
-  - [Filter : `filter`](UserGuideParticipants.md#31-filter-command)
-  - [View Participant : `view`](UserGuideParticipants.md#32-view-command)
-  - [Statistics : `statistics`](UserGuideParticipants.md#33-statistics-command)
-  - [Import : `import`](UserGuideParticipants.md#41-import-command)
-  - [Export : `export`](UserGuideParticipants.md#42-export-command)
-  - [Leave Event : `leave event`](UserGuideParticipants.md#51-leave-event-command)
+- [Getting Started](#getting-started)
+- [Command Fundamentals](#command-fundamentals)
+- [Common Commands](#common-commands)
+  - [Help : `help`](#1-help-command)
+  - [List : `list`](#2-list-command)
+  - [Search : `search`](#3-search-command)
+  - [Switch Mode : `switchmode`](#4-switch-mode-command)
+- [Event Commands](#event-commands)
+  - [Add Event : `addevent`](#11-add-event-command)
+  - [Edit Event : `editevent`](#21-edit-event-command)
+  - [Delete Event : `deleteevent`](#22-delete-event-command)
+  - [Enter Event : `enter event`](#31-enter-event-command)
+  - [Exit : `exit`](#41-exit-command)
+- [Participant Commands](#participant-commands)
+  - [Add Participant : `add`](#11-add-command)
+  - [Edit Participant : `edit`](#12-edit-command)
+  - [Delete Participant : `delete`](#13-delete-command)
+  - [Clear Participants : `clear`](#14-clear-command)
+  - [Assign Team : `assign`](#21-assign-team-command)
+  - [Check-In : `checkin`](#22-check-in-command)
+  - [Filter : `filter`](#31-filter-command)
+  - [View Participant : `view`](#32-view-command)
+  - [Statistics : `statistics`](#33-statistics-command)
+  - [Import : `import`](#41-import-command)
+  - [Export : `export`](#42-export-command)
+  - [Leave Event : `leave event`](#51-leave-event-command)
 
 ---
 
 ## 1. About TeamEventPro
 
-TeamEventPro is a desktop application designed to help users manage events and participants efficiently. It is intended for users who prefer typing commands over navigating through menus, allowing them to perform tasks quickly and consistently.
+TeamEventPro is a desktop application designed to help users manage events and participants efficiently.
+It is intended for users who prefer typing commands over navigating through menus, allowing them to
+perform tasks quickly and consistently.
 
-The application supports two main workflows. First, users can manage events by creating, editing, deleting, searching for, and entering events. Second, once inside an event, users can manage participants by adding or editing their details, assigning teams, checking attendance, viewing statistics, and importing or exporting participant data.
+The application supports two main workflows:
 
-TeamEventPro provides the speed of a Command Line Interface (CLI) while still offering the visual clarity of a Graphical User Interface (GUI). This makes it suitable for users who want a structured and efficient way to handle event and participant management in a single application.
+- **Event management**
+- **Participant management (inside an event)**
+
+TeamEventPro provides the speed of a Command Line Interface (CLI) while still offering the visual clarity
+of a Graphical User Interface (GUI). This makes it suitable for users who want a structured and efficient
+way to handle event and participant management in a single application.
 
 ---
 
@@ -63,7 +70,7 @@ You can use this mode to:
 - search for events
 - enter a specific event
 
-Full details for these commands are in [Event Commands](UserGuideEvents.md).
+Full details for these commands are in [Event Commands](#event-commands).
 
 ### 2.2 Inside an event
 
@@ -78,7 +85,7 @@ You can use this mode to:
 - import and export participant data
 - leave the current event and return to the event list
 
-Full details for these commands are in [Participant Commands](UserGuideParticipants.md).
+Full details for these commands are in [Participant Commands](#participant-commands).
 
 ## 3. Commands Available in Both Modes
 
@@ -89,17 +96,8 @@ The following commands can be used regardless of whether you are inside or outsi
 - `search`
 - `switchmode`
 
-Full details for these commands are in [Common Commands](UserGuideCommonCommands.md).
+Full details for these commands are in [Common Commands](#common-commands).
 
----
-
-## 4. Next Sections
-
-- [Getting Started](UserGuideGettingStarted.md)
-- [Common Commands](UserGuideCommonCommands.md)
-- [Command Fundamentals](UserGuideCommandFundamentals.md)
-- [Event Commands](UserGuideEvents.md)
-- [Participant Commands](UserGuideParticipants.md)
 
 ---
 
@@ -141,27 +139,17 @@ For macOS-specific setup guidance, follow the prescribed JDK instructions in the
 
 ## 4. Where to go next
 
-- For shared command conventions, prefix usage, and index/list behavior, see [Command Fundamentals](UserGuideCommandFundamentals.md).
-- View global commands in [Common Commands](UserGuideCommonCommands.md).
-- View mode-specific command details in [Event Commands](UserGuideEvents.md) and
-  [Participant Commands](UserGuideParticipants.md).
-
----
-
-## 5. Navigation
-
-- [Back to Introduction and App Modes](UG.md)
-- [Go to Command Fundamentals](UserGuideCommandFundamentals.md)
-- [Go to Common Commands](UserGuideCommonCommands.md)
-- [Go to Event Commands](UserGuideEvents.md)
-- [Go to Participant Commands](UserGuideParticipants.md)
+- For shared command conventions, prefix usage, and index/list behavior, see [Command Fundamentals](#command-fundamentals).
+- View global commands in [Common Commands](#common-commands).
+- View mode-specific command details in [Event Commands](#event-commands) and
+  [Participant Commands](#participant-commands).
 
 ---
 
 # Command Fundamentals
 
 This page is the shared conventions reference for how commands are written and interpreted across TeamEventPro.
-Read this once before using [Event Commands](UserGuideEvents.md) or [Participant Commands](UserGuideParticipants.md).
+Read this once before using [Event Commands](#event-commands) or [Participant Commands](#participant-commands).
 
 ---
 
@@ -238,118 +226,134 @@ If a command fails with format errors, copy the exact `Format` block from the re
 
 ---
 
-## 6. Navigation
-
-- [Back to Introduction, Modes, and Common Commands](UG.md)
-- [Back to Common Commands](UserGuideCommonCommands.md)
-- [Go to Event Commands](UserGuideEvents.md)
-- [Go to Participant Commands](UserGuideParticipants.md)
-
----
-
 # Common Commands
 
 This page describes commands that are available in both app modes.
 
 ---
 
-## 1. Commands Available in Both Modes
-
-The following commands can be used regardless of whether you are inside or outside an event:
-
-- `help`
-- `list`
-- `search`
-- `switchmode`
-
----
-
-## 2. Help Command
+## 1. Help Command
 
 Used to open the help window and view usage instructions.
 
-### Format
+#### Format
 `help`
 
-### Example Usage
+#### Example Usage
 ```
 help
 ```
 ![Command](images/help/command.png)
 
-### Successful Execution
+#### Successful Execution
 Opens a new window containing the User Guide link.
 
 ![Result](images/help/result.png)
 
-### Notes
+#### Notes
 - Can be used in any mode.
 
 ---
 
-## 3. List Command
+## 2. List Command
 
 Used to list all events or all participants depending on the current mode.
 
-### Format
+#### Format
 `list`
 
-### Example Usage
-`list`
+#### Example Usage
+Outside an event:
 
-### Successful Execution
-- Outside an event: `Listed all events`
-- Inside an event: `Listed all participants`
+```
+list
+```
 
-### Notes
+![Command outside an event](images/list/eventcommand.png)
+
+Inside an event:
+
+```
+list
+```
+
+![Command inside an event](images/list/participantcommand.png)
+
+#### Successful Execution
+Outside an event: `Listed all events`
+
+![Result outside an event](images/list/eventresult.png)
+
+Inside an event: `Listed all participants`
+
+![Result inside an event](images/list/participantresult.png)
+
+#### Notes
 - Works differently depending on the current mode.
 
 ---
 
-## 4. Search Command
+## 3. Search Command
 
 Used to search for matching events or participants depending on the current mode.
 
-### Format
+#### Format
 `search [KEYWORD]...`
 
-### Example Usage
-`search meetup workshop`
+#### Example Usage
+Outside an event:
 
-### Successful Execution
-- Outside an event: matching events are shown in the event list.
-- Inside an event: matching participants are shown in the participant list.
+```
+search Tech
+```
 
-### Notes
+![Command outside an event](images/search/eventcommand.png)
+
+Inside an event:
+
+```
+search [KEYWORD]...
+```
+
+![Command inside an event](images/search/participantcommand.png)
+
+#### Successful Execution
+Outside an event: matching events are shown in the event list.
+
+![Result outside an event](images/search/eventresult.png)
+
+Inside an event: matching participants are shown in the participant list.
+
+![Result inside an event](images/search/participantresult.png)
+
+#### Notes
 - Can be used in any mode.
 - The results depend on the current mode.
 
 ---
 
-## 5. Switch Mode Command
+## 4. Switch Mode Command
 
 Used to switch the application theme.
 
-### Format
+#### Format
 `switchmode [dark|light]`
 
-### Example Usage
-`switchmode dark`
+#### Example Usage
+```
+switchmode light
+```
 
-### Successful Execution
-`Switched to dark mode.`
+![Command](images/switchmode/command.png)
 
-### Notes
+#### Successful Execution
+`Switched to light mode.`
+
+![Result](images/switchmode/result.png)
+
+#### Notes
 - Can be used in any mode.
 - Only `dark` and `light` are valid values.
-
----
-
-## 6. Navigation
-
-- [Back to Introduction and App Modes](UG.md)
-- [Go to Event Commands](UserGuideEvents.md)
-- [Go to Participant Commands](UserGuideParticipants.md)
 
 ---
 
@@ -369,16 +373,20 @@ Used to add an event to the event list by specifying the name, date, and optiona
 `addevent n/[EVENT NAME] d/[DATE] [l/LOCATION] [desc/DESCRIPTION]`
 
 #### Example Usage
-`addevent n/Tech Meetup 2026 d/2026-06-15 l/NUS Techno Edge desc/Annual tech networking session`
+```
+addevent n/Tech Meetup 2026 d/2026-06-15 l/NUS Techno Edge desc/Annual tech networking session
+```
+![Command](images/addevent/command.png)
 
 #### Successful Execution
-`New event added: ...`
+![Command](images/addevent/result.png)
 
 #### Notes
 - Can only be used outside an event.
-- Event name should be concise.
-- Date must follow `YYYY-MM-DD`.
-- Location and description are optional.
+- `NAME` must start with an alphanumeric character and can only contain alphanumeric characters and spaces. It must not be blank.
+- `DATE` must follow the format `YYYY-MM-DD` e.g. `2026-06-15`.
+- `LOCATION` and `DESCRIPTION` are optional.
+- Duplicate events with the same name are not allowed.
 
 ---
 
@@ -392,10 +400,15 @@ Used to edit the details of an existing event in the event list.
 `editevent [INDEX] [n/EVENT NAME] [d/DATE] [l/LOCATION] [desc/DESCRIPTION]`
 
 #### Example Usage
-`editevent 1 n/Hack Night d/2026-08-20 l/NUS COM1 desc/Bring your laptop`
+```
+editevent 1 n/Hack Night d/2026-08-20 l/NUS COM1 desc/Bring your laptop
+```
+
+![Command](images/edit-event/command.png)
 
 #### Successful Execution
-`Edited Event: ...`
+
+![Result](images/edit-event/result.png)
 
 #### Notes
 - Can only be used outside an event.
@@ -412,10 +425,15 @@ Used to delete an event from the event list. The participant list stored under t
 `deleteevent [INDEX]`
 
 #### Example Usage
-`deleteevent 1`
+```
+deleteevent 1
+```
+
+![Command](images/delete-event/command.png)
 
 #### Successful Execution
-`Deleted Event: ... Its participant list was deleted together with the event.`
+
+![Result](images/delete-event/result.png)
 
 #### Notes
 - Can only be used outside an event.
@@ -474,20 +492,11 @@ The application is exited.
 
 ---
 
-## 5. Navigation
-
-- [Back to Introduction, Modes, and Common Commands](UG.md)
-- [Back to Common Commands](UserGuideCommonCommands.md)
-- [Back to Command Fundamentals](UserGuideCommandFundamentals.md)
-- [Go to Participant Commands](UserGuideParticipants.md)
-
----
-
 # Participant Commands
 
 This page describes commands that are used while you are inside an event and managing that event's participants.
 
-See [Command Fundamentals](UserGuideCommandFundamentals.md) for command syntax, prefix rules, index behavior, and common input mistakes.
+See [Command Fundamentals](#command-fundamentals) for command syntax, prefix rules, index behavior, and common input mistakes.
 
 ---
 
@@ -501,16 +510,21 @@ Used to add a participant to the currently entered event.
 `add n/[NAME] p/[PHONE] e/[EMAIL] a/[ADDRESS] [tm/TEAM] [g/GITHUB_USERNAME] [r/RSVP_STATUS] [t/TAG]...`
 
 #### Example Usage
-`add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 tm/Development g/johndoe r/yes t/friends`
+```
+add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 tm/Development g/johndoe r/yes t/friends
+```
+![Command](images/add/command.png)
 
 #### Successful Execution
-`New applicant added: ...`
+![Command](images/add/result.png)
 
 #### Notes
 - Can only be used inside an event.
 - Name, phone, email, and address are required.
-- `RSVP_STATUS` must be `yes`, `no`, or `pending`.
-- Team names must be alphanumeric and at most 15 characters.
+- `NAME` can contain alphanumeric characters (including accented characters e.g. José, Tomáš), spaces, apostrophes (`'`), hyphens (`-`), and forward slashes (`/`) e.g. `O'Brian`, `s/o Kumar`. Names cannot exceed 100 characters.
+- `RSVP_STATUS` must be `yes`, `no`, or `pending` (case-insensitive). Defaults to `pending` if not provided.
+- `TEAM` must be alphanumeric and at most 15 characters.
+- Two participants are considered duplicates if they share the same name and either the same phone number or the same email. Duplicate participants cannot be added to the same event.
 
 ### 1.2 Edit Command
 
@@ -520,15 +534,25 @@ Used to edit the details of an existing participant in the current event.
 `edit [INDEX] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [g/GITHUB_USERNAME] [r/RSVP_STATUS] [tm/TEAM] [t/TAG]...`
 
 #### Example Usage
-`edit 1 p/91234567 e/johndoe@example.com`
+```
+edit 1 p/91234567 e/johndoe@example.com
+```
+![Command](images/edit/command.png)
 
 #### Successful Execution
-`Edited Participant: ...`
+![Command](images/edit/result.png)
 
 #### Notes
 - Can only be used inside an event.
 - Index must be a positive integer.
 - At least one field to edit must be provided.
+- Existing values will be overwritten by the new values.
+- `NAME` follows the same constraints as the `add` command — alphanumeric characters (including accented), spaces, apostrophes, hyphens, and forward slashes. Cannot exceed 100 characters.
+- `RSVP_STATUS` must be `yes`, `no`, or `pending` (case-insensitive).
+- `TEAM` must be alphanumeric and at most 15 characters.
+- Clear all tags by typing `t/` with nothing after it.
+- Clear the team by typing `tm/` with nothing after it.
+- Editing a participant to match another participant's name and phone or email will be rejected as a duplicate.
 
 ### 1.3 Delete Command
 
@@ -538,10 +562,15 @@ Used to delete a participant from the current event.
 `delete [INDEX]`
 
 #### Example Usage
-`delete 1`
+```
+delete 1
+```
+![Command](images/delete-applicants/delete-command.png)
 
 #### Successful Execution
 `Deleted Participant: ...`
+
+![Result](images/delete-applicants/delete-result.png)
 
 #### Notes
 - Can only be used inside an event.
@@ -555,10 +584,15 @@ Used to clear all participants from the current event.
 `clear`
 
 #### Example Usage
-`clear`
+```
+clear
+```
+![Command](images/clear/clear-command.png)
 
 #### Successful Execution
 `Address book has been cleared!`
+
+![Result](images/clear/clear-result.png)
 
 #### Notes
 - Can only be used inside an event.
@@ -576,15 +610,20 @@ Used to assign a participant to a team.
 `assign [INDEX] team/[TEAM NAME]`
 
 #### Example Usage
-`assign 2 team/Alpha`
+```
+assign 2 team/Alpha
+```
+![Command](images/assign-team/example.jpg)
 
 #### Successful Execution
-`Assigned ... to Team Alpha.`
+`Assigned [participant] to Team Alpha.`
+
+![Result](images/assign-team/result.png)
 
 #### Notes
 - Can only be used inside an event.
 - Index must be a positive integer.
-- Team names should be concise and valid according to app rules.
+- Team names must be alphanumeric and at most 15 characters.
 
 ### 2.2 Check-In Command
 
@@ -711,9 +750,7 @@ filter checkin/yes
 Used to show the details of a selected participant.
 
 #### Format
-```
-view [INDEX]
-```
+`view [INDEX]`
 
 #### Example Usage
 ```
@@ -736,9 +773,7 @@ view 1
 Used to display the current event's participant statistics summary.
 
 #### Format
-```
-statistics
-```
+`statistics`
 
 #### Example Usage
 ```
@@ -768,10 +803,22 @@ Used to import participants from a CSV file into the current event.
 `import list`
 
 #### Example Usage
-`import data/participants.csv`
+```text
+import data/export/hacknight.csv
+```
+![Command](images/import-export/import-command.png)
+
+To list discoverable CSV files:
+
+```text
+import list
+```
+![Result](images/import-export/import-found.png)
 
 #### Successful Execution
 Participants from the CSV file are imported into the current event. Invalid rows and duplicates are skipped and reported.
+
+![Result](images/import-export/import-result.png)
 
 #### Notes
 - Can only be used inside an event.
@@ -787,10 +834,26 @@ Used to export participants from the current event to a CSV file.
 `export [FILE_PATH]`
 
 #### Example Usage
-`export data/exports/team-event.csv`
+```text
+export data/ForTestOnly.csv
+```
+![Command](images/import-export/export-command.png)
+
+To export using the default path:
+
+```text
+export
+```
+![Command](images/import-export/export-default-command.png)
 
 #### Successful Execution
 `Exported ... participant(s) to ...`
+
+![Result](images/import-export/export-result.png)
+
+Default-path export result:
+
+![Result](images/import-export/export-default-result.png)
 
 #### Notes
 - Can only be used inside an event.
@@ -823,11 +886,3 @@ leave event
 - Can only be used inside an event.
 - Ensure that there is no space after `event`.
 
----
-
-## 6. Navigation
-
-- [Back to Introduction, Modes, and Common Commands](UG.md)
-- [Back to Common Commands](UserGuideCommonCommands.md)
-- [Back to Command Fundamentals](UserGuideCommandFundamentals.md)
-- [Back to Event Commands](UserGuideEvents.md)

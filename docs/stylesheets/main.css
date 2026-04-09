@@ -229,19 +229,19 @@ hr {
   margin: 1.3rem 0;
 }
 
-/* Keep command examples visually distinct */
+/* Command examples without shaded backgrounds */
 pre {
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  padding: 0.75rem 0.95rem;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
   overflow-x: auto;
 }
 
 code {
-  background: #f2f4f8;
-  border-radius: 4px;
-  padding: 0.1rem 0.3rem;
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
 }
 
 pre code {
