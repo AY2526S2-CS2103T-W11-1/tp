@@ -79,10 +79,15 @@ Used to clear all applicants from the current event.
 `clear`
 
 #### Example Usage
-`clear`
+```text
+clear
+```
+![Command](images/clear/clear-command.png)
 
 #### Successful Execution
 `Address book has been cleared!`
+
+![Result](images/clear/clear-result.png)
 
 #### Notes
 - Can only be used inside an event.
