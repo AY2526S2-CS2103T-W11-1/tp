@@ -52,6 +52,7 @@
         "implementation": "Implementation",
         "add-event-feature": "Add Event Feature",
         "add-participant-feature": "Add Participant Feature",
+        "check-in-feature": "Check-In Feature",
         "edit-participant-feature": "Edit Participant Feature",
         "filter-participants": "Filter participants",
         "search-feature": "Search Feature",
