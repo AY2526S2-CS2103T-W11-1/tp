@@ -25,6 +25,7 @@ Used to add an event to the event list by specifying the name, date, and optiona
 
 #### Successful Execution
 `New event added: ...`
+![Command](images/addevent/result.png)
 
 #### Notes
 - Can only be used outside an event.

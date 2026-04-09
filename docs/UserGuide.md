@@ -105,7 +105,7 @@ Format: `addevent n/NAME d/DATE [l/LOCATION] [desc/DESCRIPTION]`
 - `NAME` must start with an alphanumeric character and can only contain alphanumeric characters and spaces. It must not be blank.
 - `DATE` must be in `YYYY-MM-DD` format.
 - You must be in the event list view to use this command.
-- Duplicate events (same name) are not allowed.
+- Duplicate events with the same name are not allowed.
 
 Examples:
 
@@ -173,8 +173,10 @@ Adds an applicant to the address book. Supports GitHub username and RSVP status 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [tm/TEAM] [g/GITHUB_USERNAME] [r/RSVP_STATUS] [t/TAG]…​`
 
 - You must enter an event first using `enter event INDEX`.
-- `RSVP_STATUS` must be `yes`, `no`, or `pending` (case-insensitive).
+- `NAME` can contain alphanumeric characters (including accented characters), spaces, apostrophes (`'`), hyphens (`-`), and forward slashes (`/`). Names cannot exceed 100 characters.
+- `RSVP_STATUS` must be `yes`, `no`, or `pending` (case-insensitive). Defaults to `pending` if not provided.
 - `TEAM` must be alphanumeric and at most 15 characters.
+- Two participants are considered duplicates if they share the same name and either the same phone number or the same email.
 
 
 
@@ -268,6 +270,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [tm/TEAM] [g/GITHUB
 - You can remove all the applicant's tags by typing `t/` without specifying any tags after it.
 - You can clear the team by typing `tm/` with nothing after it.
 - You must enter an event first using `enter event INDEX`.
+- - `NAME` follows the same constraints as the `add` command — alphanumeric characters (including accented), spaces, apostrophes, hyphens, and forward slashes. Cannot exceed 100 characters.
+- Editing a participant to match another participant's name and phone or email will be rejected as a duplicate.
 
 Examples:
 
