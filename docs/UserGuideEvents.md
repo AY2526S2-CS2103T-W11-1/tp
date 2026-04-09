@@ -12,7 +12,7 @@ This page describes commands that are primarily used while you are outside an ev
 
 ## 1. Event Creation and Setup
 
-### 1.1 Add Event command
+### 1.1 Add Event Command
 
 Used to add an event to the event list by specifying the name, date, and optional details such as location and description.
 
@@ -35,7 +35,7 @@ Used to add an event to the event list by specifying the name, date, and optiona
 
 ## 2. Event Maintenance
 
-### 2.1 Edit Event command
+### 2.1 Edit Event Command
 
 Used to edit the details of an existing event in the event list.
 
@@ -55,7 +55,7 @@ Used to edit the details of an existing event in the event list.
 - Location can be cleared with `l/`.
 - Description can be cleared with `desc/`.
 
-### 2.2 Delete Event command
+### 2.2 Delete Event Command
 
 Used to delete an event from the event list. The participant list stored under that event is deleted together with it.
 
@@ -77,7 +77,7 @@ Used to delete an event from the event list. The participant list stored under t
 
 ## 3. Event Navigation
 
-### 3.1 Enter Event command
+### 3.1 Enter Event Command
 
 Used to enter an event and switch into participant-management mode for that event.
 
@@ -103,7 +103,7 @@ enter event 1
 
 ## 4. Application Exit
 
-### 4.1 Exit command
+### 4.1 Exit Command
 
 Used to close the application.
 

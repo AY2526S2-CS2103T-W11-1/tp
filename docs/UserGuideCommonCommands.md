@@ -21,7 +21,7 @@ The following commands can be used regardless of whether you are inside or outsi
 
 ---
 
-## 2. Help command
+## 2. Help Command
 
 Used to open the help window and view usage instructions.
 
@@ -44,7 +44,7 @@ Opens a new window containing the User Guide link.
 
 ---
 
-## 3. List command
+## 3. List Command
 
 Used to list all events or all participants depending on the current mode.
 
@@ -63,7 +63,7 @@ Used to list all events or all participants depending on the current mode.
 
 ---
 
-## 4. Search command
+## 4. Search Command
 
 Used to search for matching events or participants depending on the current mode.
 
@@ -83,7 +83,7 @@ Used to search for matching events or participants depending on the current mode
 
 ---
 
-## 5. Switch Mode command
+## 5. Switch Mode Command
 
 Used to switch the application theme.
 

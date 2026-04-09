@@ -14,7 +14,7 @@ See [Command Fundamentals](UserGuideCommandFundamentals.md) for command syntax, 
 
 ## 1. Participant Management
 
-### 1.1 Add command
+### 1.1 Add Command
 
 Used to add a participant to the currently entered event.
 
@@ -33,7 +33,7 @@ Used to add a participant to the currently entered event.
 - `RSVP_STATUS` must be `yes`, `no`, or `pending`.
 - Team names must be alphanumeric and at most 15 characters.
 
-### 1.2 Edit command
+### 1.2 Edit Command
 
 Used to edit the details of an existing participant in the current event.
 
@@ -51,7 +51,7 @@ Used to edit the details of an existing participant in the current event.
 - Index must be a positive integer.
 - At least one field to edit must be provided.
 
-### 1.3 Delete command
+### 1.3 Delete Command
 
 Used to delete a participant from the current event.
 
@@ -68,7 +68,7 @@ Used to delete a participant from the current event.
 - Can only be used inside an event.
 - Index must be a positive integer.
 
-### 1.4 Clear command
+### 1.4 Clear Command
 
 Used to clear all participants from the current event.
 
@@ -89,7 +89,7 @@ Used to clear all participants from the current event.
 
 ## 2. Team and Attendance Management
 
-### 2.1 Assign Team command
+### 2.1 Assign Team Command
 
 Used to assign a participant to a team.
 
@@ -107,7 +107,7 @@ Used to assign a participant to a team.
 - Index must be a positive integer.
 - Team names should be concise and valid according to app rules.
 
-### 2.2 Check-In command
+### 2.2 Check-In Command
 
 Used to mark a participant as checked in.
 
@@ -132,7 +132,7 @@ checkin 3
 
 ## 3. Search, Filtering, and Viewing
 
-### 3.1 Filter command
+### 3.1 Filter Command
 
 Used to filter the participant list using one criterion at a time.
 
@@ -227,7 +227,7 @@ filter checkin/yes
 - Filtering is not cumulative across commands; each `filter` command replaces the previous filter/search.
 - `checkin/` accepts `yes` or `no`(case-insensitive).
 
-### 3.2 View command
+### 3.2 View Command
 
 Used to show the details of a selected participant.
 
@@ -252,7 +252,7 @@ view 1
 - The `INDEX` must refer to a participant currently shown in the displayed list, including filtered or searched results.
 - The command fails if the `INDEX` is invalid or out of range.
 
-### 3.3 Statistics command
+### 3.3 Statistics Command
 
 Used to display the current event's participant statistics summary.
 
@@ -280,7 +280,7 @@ statistics
 
 ## 4. Import and Export
 
-### 4.1 Import command
+### 4.1 Import Command
 
 Used to import participants from a CSV file into the current event.
 
@@ -300,7 +300,7 @@ Participants from the CSV file are imported into the current event. Invalid rows
 - `import list` shows discoverable CSV files.
 - Required CSV headers are `name`, `phone`, `email`, and `address`.
 
-### 4.2 Export command
+### 4.2 Export Command
 
 Used to export participants from the current event to a CSV file.
 
@@ -323,7 +323,7 @@ Used to export participants from the current event to a CSV file.
 
 ## 5. Event Navigation
 
-### 5.1 Leave Event command
+### 5.1 Leave Event Command
 
 Used to leave the current event and return to the event list.
 

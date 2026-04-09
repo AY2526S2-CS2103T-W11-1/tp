@@ -11,7 +11,7 @@ Read this once before using [Event Commands](UserGuideEvents.md) or [Participant
 
 ---
 
-## 1. Command notation
+## 1. Command Notation
 
 - Words in `UPPER_CASE` are parameters to be supplied by the user.
 - Items followed by `...` can be used multiple times.
@@ -21,11 +21,11 @@ Read this once before using [Event Commands](UserGuideEvents.md) or [Participant
 
 ---
 
-## 2. Command structure and modes
+## 2. Command Structure and Modes
 
 TeamEventPro operates in two modes:
-- **Outside an event**: event-level commands such as `addevent`, `editevent`, `deleteevent`, `enter event`.
-- **Inside an event**: participant-level commands such as `add`, `edit`, `assign`, `filter`, `checkin`.
+- **Outside an event**: event-level commands such as `addevent`, `editevent`, `deleteevent`, `enter event`, `list`, `search`.
+- **Inside an event**: participant-level commands such as `add`, `edit`, `delete`, `assign`, `filter`, `checkin`, `view`, `statistics`, `list`, `search`, `leave event`.
 
 Most commands follow one of these patterns:
 - `COMMAND [INDEX] [PREFIX/VALUE]...`
@@ -34,7 +34,7 @@ Most commands follow one of these patterns:
 
 ---
 
-## 3. Prefix reference
+## 3. Prefix Reference
 
 | Prefix | Field | Accepts | Does not accept |
 | --- | --- | --- | --- |
@@ -57,7 +57,7 @@ Use the exact prefix expected by each command. Prefixes are not interchangeable.
 
 ---
 
-## 4. Index and list behavior
+## 4. Index and List Behavior
 
 - Commands with `INDEX` use the index from the currently displayed list.
 - If the list is filtered, the index refers to the filtered results, not the full list.
@@ -71,7 +71,7 @@ The command applies to item `2` in the filtered list, not item `2` from an earli
 
 ---
 
-## 5. Common mistakes and quick fixes
+## 5. Common Mistakes and Quick Fixes
 
 - Missing required prefix (for example, no `e/` in `add`) -> include all required prefixes.
 - Invalid index -> ensure index is a positive integer within the displayed list range.
