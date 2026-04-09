@@ -69,6 +69,7 @@
     * [Add Participant Feature]({{ baseUrl }}/DeveloperGuide.html#add-participant-feature)
     * [Edit Participant Feature]({{ baseUrl }}/DeveloperGuide.html#edit-participant-feature)
     * [Filter Participants]({{ baseUrl }}/DeveloperGuide.html#filter-participants)
+    * [Check-In Feature]({{ baseUrl }}/DeveloperGuide.html#check-in-feature)
   * [Documentation, logging, testing, configuration, dev-ops]({{ baseUrl }}/DeveloperGuide.html#documentation-logging-testing-configuration-dev-ops)
   * [Appendix: Requirements]({{ baseUrl }}/DeveloperGuide.html#appendix-requirements)
   * [Appendix: Instructions for manual testing]({{ baseUrl }}/DeveloperGuide.html#appendix-instructions-for-manual-testing)
