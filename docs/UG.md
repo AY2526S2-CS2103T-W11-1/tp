@@ -17,24 +17,24 @@ pageNav: 3
   - [Search : `search`](#3-search-command)
   - [Switch Mode : `switchmode`](#4-switch-mode-command)
 - [Event Commands](#event-commands)
-  - [Add Event : `addevent`](#11-add-event-command)
-  - [Edit Event : `editevent`](#21-edit-event-command)
-  - [Delete Event : `deleteevent`](#22-delete-event-command)
-  - [Enter Event : `enter event`](#31-enter-event-command)
-  - [Exit : `exit`](#41-exit-command)
+  - [Add Event : `addevent`](#cmd-addevent)
+  - [Edit Event : `editevent`](#cmd-editevent)
+  - [Delete Event : `deleteevent`](#cmd-deleteevent)
+  - [Enter Event : `enter event`](#cmd-enter-event)
+  - [Exit : `exit`](#cmd-exit)
 - [Participant Commands](#participant-commands)
-  - [Add Participant : `add`](#11-add-command)
-  - [Edit Participant : `edit`](#12-edit-command)
-  - [Delete Participant : `delete`](#13-delete-command)
-  - [Clear Participants : `clear`](#14-clear-command)
-  - [Assign Team : `assign`](#21-assign-team-command)
-  - [Check-In : `checkin`](#22-check-in-command)
-  - [Filter : `filter`](#31-filter-command)
-  - [View Participant : `view`](#32-view-command)
-  - [Statistics : `statistics`](#33-statistics-command)
-  - [Import : `import`](#41-import-command)
-  - [Export : `export`](#42-export-command)
-  - [Leave Event : `leave event`](#51-leave-event-command)
+  - [Add Participant : `add`](#cmd-add)
+  - [Edit Participant : `edit`](#cmd-edit)
+  - [Delete Participant : `delete`](#cmd-delete)
+  - [Clear Participants : `clear`](#cmd-clear)
+  - [Assign Team : `assign`](#cmd-assign)
+  - [Check-In : `checkin`](#cmd-checkin)
+  - [Filter : `filter`](#cmd-filter)
+  - [View Participant : `view`](#cmd-view)
+  - [Statistics : `statistics`](#cmd-statistics)
+  - [Import : `import`](#cmd-import)
+  - [Export : `export`](#cmd-export)
+  - [Leave Event : `leave event`](#cmd-leave-event)
 
 ---
 
@@ -366,6 +366,7 @@ This page describes commands that are primarily used while you are outside an ev
 ## 1. Event Creation and Setup
 
 ### 1.1 Add Event Command
+<a id="cmd-addevent"></a>
 
 Used to add an event to the event list by specifying the name, date, and optional details such as location and description.
 
@@ -393,6 +394,7 @@ addevent n/Tech Meetup 2026 d/2026-06-15 l/NUS Techno Edge desc/Annual tech netw
 ## 2. Event Maintenance
 
 ### 2.1 Edit Event Command
+<a id="cmd-editevent"></a>
 
 Used to edit the details of an existing event in the event list.
 
@@ -418,6 +420,7 @@ editevent 1 n/Hack Night d/2026-08-20 l/NUS COM1 desc/Bring your laptop
 - Description can be cleared with `desc/`.
 
 ### 2.2 Delete Event Command
+<a id="cmd-deleteevent"></a>
 
 Used to delete an event from the event list. The participant list stored under that event is deleted together with it.
 
@@ -445,6 +448,7 @@ deleteevent 1
 ## 3. Event Navigation
 
 ### 3.1 Enter Event Command
+<a id="cmd-enter-event"></a>
 
 Used to enter an event and switch into participant-management mode for that event.
 
@@ -471,6 +475,7 @@ enter event 1
 ## 4. Application Exit
 
 ### 4.1 Exit Command
+<a id="cmd-exit"></a>
 
 Used to close the application.
 
@@ -503,6 +508,7 @@ See [Command Fundamentals](#command-fundamentals) for command syntax, prefix rul
 ## 1. Participant Management
 
 ### 1.1 Add Command
+<a id="cmd-add"></a>
 
 Used to add a participant to the currently entered event.
 
@@ -527,6 +533,7 @@ add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 tm/D
 - Two participants are considered duplicates if they share the same name and either the same phone number or the same email. Duplicate participants cannot be added to the same event.
 
 ### 1.2 Edit Command
+<a id="cmd-edit"></a>
 
 Used to edit the details of an existing participant in the current event.
 
@@ -555,6 +562,7 @@ edit 1 p/91234567 e/johndoe@example.com
 - Editing a participant to match another participant's name and phone or email will be rejected as a duplicate.
 
 ### 1.3 Delete Command
+<a id="cmd-delete"></a>
 
 Used to delete a participant from the current event.
 
@@ -577,6 +585,7 @@ delete 1
 - Index must be a positive integer.
 
 ### 1.4 Clear Command
+<a id="cmd-clear"></a>
 
 Used to clear all participants from the current event.
 
@@ -603,6 +612,7 @@ clear
 ## 2. Team and Attendance Management
 
 ### 2.1 Assign Team Command
+<a id="cmd-assign"></a>
 
 Used to assign a participant to a team.
 
@@ -626,6 +636,7 @@ assign 2 team/Alpha
 - Team names must be alphanumeric and at most 15 characters.
 
 ### 2.2 Check-In Command
+<a id="cmd-checkin"></a>
 
 Used to mark a participant as checked in.
 
@@ -651,6 +662,7 @@ checkin 3
 ## 3. Search, Filtering, and Viewing
 
 ### 3.1 Filter Command
+<a id="cmd-filter"></a>
 
 Used to filter the participant list using one criterion at a time.
 
@@ -746,6 +758,7 @@ filter checkin/yes
 - `checkin/` accepts `yes` or `no`(case-insensitive).
 
 ### 3.2 View Command
+<a id="cmd-view"></a>
 
 Used to show the details of a selected participant.
 
@@ -769,6 +782,7 @@ view 1
 - The command fails if the `INDEX` is invalid or out of range.
 
 ### 3.3 Statistics Command
+<a id="cmd-statistics"></a>
 
 Used to display the current event's participant statistics summary.
 
@@ -795,6 +809,7 @@ statistics
 ## 4. Import and Export
 
 ### 4.1 Import Command
+<a id="cmd-import"></a>
 
 Used to import participants from a CSV file into the current event.
 
@@ -827,6 +842,7 @@ Participants from the CSV file are imported into the current event. Invalid rows
 - Required CSV headers are `name`, `phone`, `email`, and `address`.
 
 ### 4.2 Export Command
+<a id="cmd-export"></a>
 
 Used to export participants from the current event to a CSV file.
 
@@ -866,6 +882,7 @@ Default-path export result:
 ## 5. Event Navigation
 
 ### 5.1 Leave Event Command
+<a id="cmd-leave-event"></a>
 
 Used to leave the current event and return to the event list.
 
