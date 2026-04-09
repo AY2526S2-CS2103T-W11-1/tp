@@ -57,10 +57,15 @@ Used to delete an applicant from the current event.
 `delete [INDEX]`
 
 #### Example Usage
-`delete 1`
+```text
+delete 1
+```
+![Command](images/delete-applicants/delete-command.png)
 
 #### Successful Execution
 `Deleted Applicant: ...`
+
+![Result](images/delete-applicants/delete-result.png)
 
 #### Notes
 - Can only be used inside an event.
