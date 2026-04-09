@@ -68,8 +68,8 @@
         "glossary": "Glossary",
         "appendix-instructions-for-manual-testing": "Appendix: Instructions for manual testing",
         "launch-and-shutdown": "Launch and shutdown",
-        "deleting-an-applicant": "Deleting an applicant",
-        "filtering-applicants": "Filtering applicants",
+        "deleting-a-participant": "Deleting a participant",
+        "filtering-participants": "Filtering participants",
         "saving-data": "Saving data"
       },
       "headingKeywords": {}
