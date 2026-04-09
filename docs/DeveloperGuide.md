@@ -402,102 +402,117 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-**Use Case: UC01 - Check-in a participant**
+#### Use case: UC01 - Enter an event
 
-**System**: TeamEventPro
-**Actor**: Organizer
+```
+System: TeamEventPro
+Actor: Organizer
+MSS:
+  1. Organizer requests to enter an event.
+  2. TeamEventPro requests the event index.
+  3. Organizer provides a valid event index.
+  4. TeamEventPro switches to that event's participant view and displays the participant list.
+  Use case ends.
 
-**MSS(Main Success Scenario):**
+Extensions:
+  3a. The index is invalid.
+      3a1. TeamEventPro shows an invalid index error.
+      3a2. Organizer provides another index.
+      Steps 3a1-3a2 are repeated until a valid index is provided.
+      Use case resumes from step 4.
 
-1.  Organizer requests to find participants using a keyword.
-2.  TeamEventPro shows a list of matching participants.
-3.  Organizer requests to check-in a specific participant from the list using their index.
-4.  TeamEventPro updates the attendance status of the participant to "checked-in" and shows a success message.
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list of matching participants is empty.
-    * 2a1. TeamEventPro shows a message indicating no participants were found.
-
+  1a. Organizer is already in an event participant view.
+      1a1. TeamEventPro shows an error asking the organizer to leave the current event first.
       Use case ends.
+```
 
-* 3a. The given index is invalid.
+#### Use case: UC02 - Add a participant
 
-    * 3a1. TeamEventPro shows an error message indicating the index is invalid.
+```
+System: TeamEventPro
+Actor: Organizer
+Preconditions: Organizer is in an event participant view.
+MSS:
+  1. Organizer requests to add a participant.
+  2. TeamEventPro requests the participant details.
+  3. Organizer enters valid participant details.
+  4. TeamEventPro adds the participant and shows a success message.
+  Use case ends.
 
-      3a2. Organizer enters a new check-in command with a valid index.
-  
-      Steps resume from step 4.
+Extensions:
+  3a. The entered details are invalid.
+      3a1. TeamEventPro shows the relevant format constraints.
+      3a2. Organizer enters corrected details.
+      Steps 3a1-3a2 are repeated until all details are valid.
+      Use case resumes from step 4.
 
-**Use Case: UC02 - Assign a participant to a team**
-
-**System**: TeamEventPro
-**Actor**: Organizer
-
-**MSS(Main Success Scenario):**
-
-1.  Organizer requests to find participants using a keyword.
-2.  TeamEventPro shows a list of matching participants.
-3.  Organizer requests to assign a specific participant from the list to a team using their index and the team name.
-4.  TeamEventPro updates the participant's team affiliation and shows a success message.
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list of matching participants is empty.
-    * 2a1. TeamEventPro shows a message indicating no participants were found.
-
+  3b. A participant with the same identity already exists.
+      3b1. TeamEventPro shows a duplicate participant error.
       Use case ends.
+```
 
-* 3a. The given index is invalid.
+#### Use case: UC03 - Filter participants
 
-    * 3a1. TeamEventPro shows an error message indicating the index is invalid.
+```
+System: TeamEventPro
+Actor: Organizer
+Preconditions: Organizer is in an event participant view.
+MSS:
+  1. Organizer requests to filter participants.
+  2. TeamEventPro requests one filter criterion.
+  3. Organizer provides one valid criterion (RSVP, tag, team, or check-in).
+  4. TeamEventPro displays the filtered participant list and count.
+  Use case ends.
 
-      3a2. Organizer enters a new team assignment command with a valid index.
+Extensions:
+  3a. The filter format or value is invalid.
+      3a1. TeamEventPro shows the filter usage and/or constraints.
+      3a2. Organizer enters a corrected filter command.
+      Use case resumes from step 4.
 
-      Steps resume from step 4.
-
-* 3b. The given team name format is invalid (e.g., contains special characters).
-
-    * 3b1. TeamEventPro shows an error message detailing the team name constraints.
-
-      3b2. Organizer enters a new team assignment command with a valid team name.
-
-      Steps resume from step 4.
-
-**Use Case: UC03 - Delete a participant**
-
-**System**: TeamEventPro
-**Actor**: Organizer
-
-**MSS(Main Success Scenario):**
-
-1.  Organizer requests to find participants using a keyword.
-2.  TeamEventPro shows a list of matching participants.
-3.  Organizer requests to delete a specific participant from the list using their index.
-4.  TeamEventPro deletes the participant and shows a success message.
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list of matching participants is empty.
-    * 2a1. TeamEventPro shows a message indicating no participants were found.
-
+  3b. More than one criterion is provided in one command.
+      3b1. TeamEventPro rejects the command and shows correct usage.
       Use case ends.
+```
 
-* 3a. The given index is invalid.
+#### Use case: UC04 - Check in a participant
 
-    * 3a1. TeamEventPro shows an error message indicating the index is invalid.
+```
+System: TeamEventPro
+Actor: Organizer
+Preconditions: Organizer is in an event participant view.
+MSS:
+  1. Organizer requests to check in a participant.
+  2. TeamEventPro requests the participant index.
+  3. Organizer provides a valid participant index.
+  4. TeamEventPro marks the participant as checked in and shows a success message.
+  Use case ends.
 
-      3a2. Organizer enters a new new delete command with a valid index.
+Extensions:
+  3a. The index is invalid.
+      3a1. TeamEventPro shows an invalid index error.
+      3a2. Organizer provides another index.
+      Steps 3a1-3a2 are repeated until a valid index is provided.
+      Use case resumes from step 4.
+```
 
-      Steps resume from step 4.
+#### Use case: UC05 - View event statistics
 
-*{More to be added}*
+```
+System: TeamEventPro
+Actor: Organizer
+Preconditions: Organizer is in an event participant view.
+MSS:
+  1. Organizer requests to view event statistics.
+  2. TeamEventPro computes participant statistics for the current event.
+  3. TeamEventPro displays the statistics dashboard.
+  Use case ends.
+
+Extensions:
+  2a. The event has no participant data for one or more categories.
+      2a1. TeamEventPro shows empty-state output for those categories.
+      Use case resumes from step 3.
+```
 
 ### Non-Functional Requirements
 
