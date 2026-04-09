@@ -156,6 +156,65 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Filter participants
+
+#### Overview
+
+The `filter` command narrows the currently displayed participant list using one criterion per command.
+
+Supported criteria:
+* RSVP: `r/yes`, `r/no`, `r/pending`.
+* Tag: `t/<tag>`.
+* Team: `team/<teamName>`.
+* Check-in: `checkin/yes` or `checkin/no`.
+
+Filtering is valid only in event participant mode. If the user is not inside an event, execution fails with `Please enter an event first.` (`Messages.MESSAGE_ENTER_EVENT_FIRST`).
+
+#### Architecture (key components)
+
+The filter feature is implemented across three main areas:
+* **Parser layer (`FilterCommandParser`)**: validates command format and constructs `PersonMatchesFilterPredicate`.
+* **Command layer (`FilterCommand`)**: checks event context and applies the predicate via `Model#updateFilteredPersonList(...)`.
+* **Model layer (`PersonMatchesFilterPredicate` + `Model`)**: evaluates each `Person` and updates the filtered observable participant list exposed to the UI.
+
+<puml src="diagrams/FilterFeatureClassDiagram.puml" width="640" />
+
+#### Implementation details
+
+1. `AddressBookParser` dispatches `filter ...` input to `FilterCommandParser`.
+2. `FilterCommandParser` tokenizes the arguments and validates that:
+   * input is not empty;
+   * exactly one supported filter prefix is provided (`r/`, `t/`, `team/`, or `checkin/`);
+   * unsupported participant prefixes in the same command (e.g., `n/`, `e/`) are rejected;
+   * duplicate filter prefixes are rejected.
+3. The parser builds a `PersonMatchesFilterPredicate` and returns a `FilterCommand`.
+4. During execution, `FilterCommand` first checks `model.isInEventParticipantsMode()`.
+5. If the check passes, it calls `model.updateFilteredPersonList(predicate)`.
+6. The command then returns a `CommandResult` using the size of `model.getFilteredPersonList()` for feedback.
+
+Failure paths:
+* Invalid filter format/value -> `ParseException` (shows command usage or value constraints).
+* Valid parse but not in event participant mode -> `CommandException` with `Messages.MESSAGE_ENTER_EVENT_FIRST`.
+
+<puml src="diagrams/FilterCommandSequenceDiagram.puml" width="720" alt="Sequence diagram for filter command" />
+
+#### Design considerations
+
+**Aspect: Single-criterion filter input**
+* **Current choice:** accept only one filter criterion per command.
+  * Pros: simpler parsing, clearer error handling, predictable behaviour.
+  * Cons: users cannot compose criteria in one command (e.g., tag + RSVP together).
+
+**Aspect: Event-context restriction**
+* **Current choice:** allow filtering only in event participant mode.
+  * Pros: prevents ambiguity about whether filtering targets events or participants.
+  * Cons: users must explicitly enter an event before filtering participants.
+
+**Aspect: Predicate evaluation strategy**
+* **Current choice:** `PersonMatchesFilterPredicate` supports all four fields internally, while parser currently activates one criterion per command.
+  * Pros: reusable predicate type with a single execution path in `FilterCommand`.
+  * Cons: extra predicate flexibility is not exposed to users under the current single-criterion command syntax.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
