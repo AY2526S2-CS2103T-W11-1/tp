@@ -294,7 +294,7 @@ Inside an event: `Listed all participants`
 Used to search for matching events or participants depending on the current mode.
 
 #### Format
-`search [KEYWORD]...`
+`search SEARCH_PHRASE`
 
 #### Example Usage
 Outside an event:
@@ -306,7 +306,7 @@ search Tech
 Inside an event:
 
 ```
-search [KEYWORD]...
+search John Doe
 ```
 
 #### Successful Execution
@@ -323,7 +323,9 @@ Inside an event: matching participants are shown in the participant list.
 - The results depend on the current mode.
 - Outside an event, `search` checks event name, date, location, and description.
 - Inside an event, `search` checks participant name, phone, address, email, team, GitHub username, and check-in status.
-- Matching is case-insensitive and works on substrings.
+- The full search phrase is matched as written, after trimming extra spaces.
+- For example, `search John` matches fields containing `John`, while `search John Doe` only matches fields containing `John Doe`.
+- Matching is case-insensitive and works on substrings within each relevant visible field.
 
 ---
 
@@ -906,4 +908,3 @@ leave event
 #### Notes
 - Can only be used inside an event.
 - Ensure that there is no space after `event`.
-

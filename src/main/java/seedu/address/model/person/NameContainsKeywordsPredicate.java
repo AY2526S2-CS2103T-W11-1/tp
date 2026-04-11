@@ -3,25 +3,32 @@ package seedu.address.model.person;
 import java.util.List;
 import java.util.Locale;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
- * Tests that a {@code Person}'s visible fields match any of the keywords given.
+ * Tests that a {@code Person}'s visible fields contain the full search phrase.
  */
 public class NameContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;
+    private final String searchPhrase;
 
+    /**
+     * Creates a predicate that matches the given search terms as one normalised phrase.
+     */
     public NameContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
+        searchPhrase = keywords.stream()
+                .map(String::trim)
+                .filter(keyword -> !keyword.isEmpty())
+                .collect(Collectors.joining(" "));
     }
 
     @Override
     public boolean test(Person person) {
-        return keywords.stream()
-                .filter(keyword -> !keyword.trim().isEmpty())
-                .anyMatch(keyword -> matchesAnyVisibleField(person, keyword));
+        return !searchPhrase.isEmpty() && matchesAnyVisibleField(person, searchPhrase);
     }
 
     private boolean matchesAnyVisibleField(Person person, String keyword) {
@@ -57,8 +64,8 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
             return false;
         }
 
-        NameContainsKeywordsPredicate otherNameContainsKeywordsPredicate = (NameContainsKeywordsPredicate) other;
-        return keywords.equals(otherNameContainsKeywordsPredicate.keywords);
+        NameContainsKeywordsPredicate otherPredicate = (NameContainsKeywordsPredicate) other;
+        return searchPhrase.equals(otherPredicate.searchPhrase);
     }
 
     @Override

@@ -7,9 +7,7 @@ import static seedu.address.logic.Messages.MESSAGE_EVENTS_LISTED_OVERVIEW;
 import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.enterDefaultEvent;
-import static seedu.address.testutil.TypicalPersons.CARL;
 import static seedu.address.testutil.TypicalPersons.ELLE;
-import static seedu.address.testutil.TypicalPersons.FIONA;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -75,13 +73,13 @@ public class SearchCommandTest {
 
         Model localModel = new ModelManager(new AddressBook(), eventBook, new UserPrefs());
         Model expectedLocalModel = new ModelManager(new AddressBook(), eventBook, new UserPrefs());
-        SearchCommand command = new SearchCommand(Arrays.asList("machine", "com1"));
+        SearchCommand command = new SearchCommand(Arrays.asList("machine", "learning"));
 
         expectedLocalModel.updateFilteredEventList(
-                new EventMatchesKeywordsPredicate(Arrays.asList("machine", "com1")));
+                new EventMatchesKeywordsPredicate(Arrays.asList("machine", "learning")));
         assertCommandSuccess(command, localModel,
-                String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 2), expectedLocalModel);
-        assertEquals(Arrays.asList(techMeetup, aiWorkshop), localModel.getFilteredEventList());
+                String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 1), expectedLocalModel);
+        assertEquals(Arrays.asList(aiWorkshop), localModel.getFilteredEventList());
     }
 
     @Test
@@ -89,16 +87,16 @@ public class SearchCommandTest {
         enterDefaultEvent(model);
         enterDefaultEvent(expectedModel);
 
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
-        NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
-        SearchCommand command = new SearchCommand(Arrays.asList("Kurz", "Elle", "Kunz"));
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        NameContainsKeywordsPredicate predicate = preparePredicate("Elle Meyer");
+        SearchCommand command = new SearchCommand(Arrays.asList("Elle", "Meyer"));
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(ELLE), model.getFilteredPersonList());
     }
 
     @Test
-    public void execute_emailAndGitHubKeywords_multiplePersonsFound() {
+    public void execute_emailKeyword_onePersonFound() {
         Person alex = new PersonBuilder().withName("Alex Yeoh")
                 .withEmail("alexyeoh@example.com")
                 .withGitHub("alexyeoh")
@@ -120,13 +118,38 @@ public class SearchCommandTest {
         Model expectedLocalModel = new ModelManager(addressBook, new UserPrefs());
         enterDefaultEvent(localModel);
         enterDefaultEvent(expectedLocalModel);
-        NameContainsKeywordsPredicate predicate = preparePredicate("ALEXYEOH@EXAMPLE.COM LIDAVID");
-        SearchCommand command = new SearchCommand(Arrays.asList("ALEXYEOH@EXAMPLE.COM", "LIDAVID"));
+        NameContainsKeywordsPredicate predicate = preparePredicate("ALEXYEOH@EXAMPLE.COM");
+        SearchCommand command = new SearchCommand(Arrays.asList("ALEXYEOH@EXAMPLE.COM"));
 
         expectedLocalModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, localModel,
-                String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2), expectedLocalModel);
-        assertEquals(Arrays.asList(alex, david), localModel.getFilteredPersonList());
+                String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1), expectedLocalModel);
+        assertEquals(Arrays.asList(alex), localModel.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_fullNamePhrase_onlyExactPhraseFound() {
+        Person johnTan = new PersonBuilder().withName("John Tan")
+                .withEmail("johntan@example.com")
+                .build();
+        Person johnDoe = new PersonBuilder().withName("John Doe")
+                .withEmail("johndoe@example.com")
+                .build();
+        AddressBook addressBook = new AddressBook();
+        addressBook.addPerson(johnTan);
+        addressBook.addPerson(johnDoe);
+
+        Model localModel = new ModelManager(addressBook, new UserPrefs());
+        Model expectedLocalModel = new ModelManager(addressBook, new UserPrefs());
+        enterDefaultEvent(localModel);
+        enterDefaultEvent(expectedLocalModel);
+        NameContainsKeywordsPredicate predicate = preparePredicate("John Doe");
+        SearchCommand command = new SearchCommand(Arrays.asList("John", "Doe"));
+
+        expectedLocalModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, localModel,
+                String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1), expectedLocalModel);
+        assertEquals(Arrays.asList(johnDoe), localModel.getFilteredPersonList());
     }
 
     @Test

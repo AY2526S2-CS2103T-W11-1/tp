@@ -20,8 +20,8 @@ public class SearchCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Finds matching events before entering an event, or matching participants after entering one.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " meetup workshop";
+            + "Parameters: SEARCH_PHRASE\n"
+            + "Example: " + COMMAND_WORD + " John Doe";
 
     private final List<String> keywords;
 

@@ -331,24 +331,25 @@ Examples:
 
 ### Searching events or applicants : `search`
 
-Searches the currently active list using one or more keywords.
+Searches the currently active list using a search phrase.
 
-Format: `search KEYWORD [MORE_KEYWORDS]`
+Format: `search SEARCH_PHRASE`
 
 - The search is case-insensitive.
-- The order of the keywords does not matter.
-- Items matching at least one keyword will be returned (i.e. `OR` search).
+- The full search phrase is matched as written, after trimming extra spaces.
+- For example, `search John` matches fields containing `John`, while `search John Doe` only matches fields containing `John Doe`.
 - In the event list view, `search` looks through event `name`, `date`, `location`, and `description`.
 - After `enter event INDEX`, `search` looks through applicant `name`, `phone`, `address`, `email`, `team`,
   `GitHub`, and `check-in status`.
-- Matching uses case-insensitive substring matching on the relevant visible fields.
+- Matching uses case-insensitive substring matching on each relevant visible field.
 
 Examples:
 
-- `search tech 2026-06-15` — Returns events whose details match either `tech` or `2026-06-15`.
+- `search tech` — Returns events whose details contain `tech`.
+- `search John Doe` — Returns applicants whose details contain the full phrase `John Doe`.
 - `enter event 1` followed by `search alex` — Returns applicants in the current event whose details match `alex`.
-- `enter event 1` followed by `search lidavid checked-in` — Returns applicants in the current event matching either
-  `lidavid` or `checked-in`.
+- `enter event 1` followed by `search John Doe` — Returns applicants in the current event whose details contain
+  `John Doe`.
 
 ### Deleting an applicant : `delete`
 
@@ -432,7 +433,7 @@ Furthermore, certain edits can cause TeamEventPro to behave in unexpected ways (
 | **Filter**  | `filter r/RSVP` or `filter t/TAG` e.g., `filter r/yes`, `filter t/Python`                                                                                                                 |
 | **Import**  | `import FILE_PATH` or `import list` e.g., `import data/participants.csv`, `import list`                                                                                                   |
 | **List**    | `list`                                                                                                                                                                                    |
-| **Search**  | `search KEYWORD [MORE_KEYWORDS]` e.g., `search tech meetup`                                                                                                                               |
+| **Search**  | `search SEARCH_PHRASE` e.g., `search tech meetup`                                                                                                                                         |
 | **SwitchTheme** | `switchtheme THEME` e.g., `switchtheme light`                                                                                                                                        |
 | **Export**  | `export [FILE_PATH]` e.g., `export`, `export data/exports/hacknight.csv`                                                                                                                  |                                                                                                                               |
 | **Help**    | `help`                                                                                                                                                                                    |

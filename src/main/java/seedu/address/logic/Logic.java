@@ -27,7 +27,7 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
-     * Updates the currently filtered list using live search keywords.
+     * Updates the currently filtered list using a live search phrase.
      * This bypasses command execution and does not write to storage.
      */
     void updateLiveSearch(String queryText);

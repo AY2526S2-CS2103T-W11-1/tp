@@ -36,7 +36,7 @@ public class EventMatchesKeywordsPredicateTest {
         assertTrue(new EventMatchesKeywordsPredicate(Collections.singletonList("tech")).test(event));
         assertTrue(new EventMatchesKeywordsPredicate(Collections.singletonList("2026-06-15")).test(event));
         assertTrue(new EventMatchesKeywordsPredicate(Collections.singletonList("marina")).test(event));
-        assertTrue(new EventMatchesKeywordsPredicate(Arrays.asList("networking", "hackathon")).test(event));
+        assertTrue(new EventMatchesKeywordsPredicate(Arrays.asList("monthly", "networking")).test(event));
     }
 
     @Test
@@ -49,5 +49,6 @@ public class EventMatchesKeywordsPredicateTest {
 
         assertFalse(new EventMatchesKeywordsPredicate(Collections.emptyList()).test(event));
         assertFalse(new EventMatchesKeywordsPredicate(Collections.singletonList("workshop")).test(event));
+        assertFalse(new EventMatchesKeywordsPredicate(Arrays.asList("networking", "hackathon")).test(event));
     }
 }

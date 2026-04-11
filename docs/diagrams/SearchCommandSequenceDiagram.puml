@@ -30,7 +30,7 @@ AddressBookParser -> SearchCommandParser : parse(" meetup")
 activate SearchCommandParser
 
 create SearchCommand
-SearchCommandParser -> SearchCommand : SearchCommand(keywords)
+SearchCommandParser -> SearchCommand : SearchCommand(search terms)
 activate SearchCommand
 SearchCommand --> SearchCommandParser : s
 deactivate SearchCommand

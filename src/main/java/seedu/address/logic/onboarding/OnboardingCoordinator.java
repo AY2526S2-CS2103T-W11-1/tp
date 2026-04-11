@@ -277,7 +277,7 @@ public class OnboardingCoordinator {
             return "Put \"" + participantNameOrPlaceholder() + "\" on a team (use their list index):\n"
                     + AssignTeamCommand.COMMAND_WORD + " 1 " + PREFIX_ASSIGN_TEAM + "Alpha";
         case SEARCH:
-            return "Try searching by keyword (matches name, phone, email, team, etc.):\n"
+            return "Try searching by phrase (matches name, phone, email, team, etc.):\n"
                     + SearchCommand.COMMAND_WORD + " " + searchKeywordSuggestion();
         default:
             return "";

@@ -385,8 +385,8 @@ The search feature is facilitated by `SearchCommand`. It supports dual behaviour
 The command follows these steps when executed:
 
 1. `AddressBookParser` receives the input and creates a `SearchCommandParser`.
-2. `SearchCommandParser` trims and validates the arguments. If the user provides no keyword, a `ParseException` is thrown.
-3. `SearchCommandParser` splits the input into keywords and constructs a `SearchCommand`.
+2. `SearchCommandParser` trims and validates the arguments. If the user provides no search phrase, a `ParseException` is thrown.
+3. `SearchCommandParser` normalises the input into search terms and constructs a `SearchCommand`.
 4. `SearchCommand#execute()` checks `model.isInEventParticipantsMode()`.
 5. If the app is in event participant mode, `SearchCommand` applies `NameContainsKeywordsPredicate` through `Model#updateFilteredPersonList(...)`.
 6. Otherwise, it applies `EventMatchesKeywordsPredicate` through `Model#updateFilteredEventList(...)`.
@@ -980,9 +980,9 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: Stay in the global event view with at least a few events.
 
     1. Test case: `search tech` (assuming an event with "tech" in the name exists)<br>
-       Expected: Event list filtered to show only events whose name matches "tech". Status message shows count.
+       Expected: Event list filtered to show only events whose visible fields contain "tech". Status message shows count.
 
-    1. Test case: `search` (no keywords)<br>
+    1. Test case: `search` (no search phrase)<br>
        Expected: Error message with usage instructions shown.
 
 1. Searching inside an event participant view
@@ -992,8 +992,8 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `search John`<br>
        Expected: Participant list filtered to show only participants matching "John". Status message shows count.
 
-    1. Test case: `search john doe` (multiple keywords)<br>
-       Expected: Participants matching either "john" or "doe" are shown.
+    1. Test case: `search john doe` (multi-word search phrase)<br>
+       Expected: Only participants with a visible field containing the full phrase "john doe" are shown.
 
     1. Test case: `list` after a search.<br>
        Expected: Full list restored.
