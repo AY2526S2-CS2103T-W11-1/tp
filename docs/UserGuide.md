@@ -38,7 +38,7 @@ your event management tasks done faster than traditional GUI apps.
   - `enter event 1` : Enters the 1st event so applicant commands operate on that event's participant list.
   - `deleteevent 2` : Deletes the 2nd event and its participant list.
   - `list` : Lists all participants in the current event.
-  - `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 tm/Dev g/johndoe r/yes` : Adds an applicant with team, GitHub, and RSVP status.
+  - `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 team/Dev g/johndoe r/yes` : Adds an applicant with team, GitHub, and RSVP status.
   - `filter r/yes` : Filters to show only applicants who have RSVP'd yes.
   - `checkin 1` : Marks the 1st applicant in the current list as checked in.
   - `assign 2 team/Alpha` : Assigns the 2nd applicant to team Alpha.
@@ -170,7 +170,7 @@ Format: `leave`
 
 Adds an applicant to the address book. Supports GitHub username and RSVP status in addition to core contact fields.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [tm/TEAM] [g/GITHUB_USERNAME] [r/RSVP_STATUS] [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [team/TEAM] [g/GITHUB_USERNAME] [r/RSVP_STATUS] [t/TAG]…​`
 
 - You must enter an event first using `enter event INDEX`.
 - `NAME` can contain alphanumeric characters (including accented characters), spaces, apostrophes (`'`), hyphens (`-`), and forward slashes (`/`). Names cannot exceed 100 characters.
@@ -190,7 +190,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [tm/TEAM] [g/GITHUB_USERNAM
 Examples:
 
 - `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25`
-- `add n/Betsy Crowe p/1234567 e/betsy@example.com a/Newgate Prison tm/Development g/betsycrowe r/yes t/Python t/ML`
+- `add n/Betsy Crowe p/1234567 e/betsy@example.com a/Newgate Prison team/Development g/betsycrowe r/yes t/Python t/ML`
 
 ### Listing all events or applicants : `list`
 
@@ -211,13 +211,25 @@ Examples:
 
 Imports applicants from a CSV file into the currently entered event.
 
+How `FILE_PATH` is interpreted:
+
+- Relative paths are resolved from the app's working folder (the folder where you run the JAR).
+- Absolute paths are also supported.
+- On Windows, use either `C:/...` or `C:\\...` style absolute paths.
+- On macOS, use `/...` style absolute paths.
+
+Before using `import`, prepare your CSV with the exact expected structure:
+
+- Required header columns: `name,phone,email,address`
+- Optional header columns: `team,github,rsvpStatus,tags,checkinStatus`
+- If optional columns are included, append them after the required columns in the order shown above.
+
 Format: `import FILE_PATH` or `import list`
 
 - You must enter an event first using `enter event INDEX`.
 - The file path must point to a `.csv` file.
-- Use `import list` (or `import` with no path) to list discoverable `.csv` files and their directories.
-- Required CSV headers: `name,phone,email,address`.
-- Optional CSV headers: `team,github,rsvpStatus,tags,checkinStatus`.
+- Use `import list` to list discoverable `.csv` files and their directories.
+- `import` with no parameters behaves the same as `import list`.
 - Duplicate applicants are skipped.
 - Invalid rows are skipped and reported in the command result.
 - CSV field validation uses the same rules as applicant commands where applicable:
@@ -240,11 +252,20 @@ Jane Tan,91234567,jane@example.com,5 Sports Hub Ave,,,no,,false
 Example:
 
 - `import data/participants.csv`
+- `import C:/Users/Alex/tp/data/participants.csv` (Windows absolute path)
+- `import /Users/alex/tp/data/participants.csv` (macOS absolute path)
 - `import list`
 
 ### Exporting applicants to CSV : `export`
 
 Exports all applicants in the currently entered event to a CSV file.
+
+How `FILE_PATH` is interpreted:
+
+- Relative paths are resolved from the app's working folder (the folder where you run the JAR).
+- Absolute paths are also supported.
+- On Windows, use either `C:/...` or `C:\\...` style absolute paths.
+- On macOS, use `/...` style absolute paths.
 
 Format: `export [FILE_PATH]`
 
@@ -256,19 +277,21 @@ Examples:
 
 - `export`
 - `export data/exports/hacknight.csv`
+- `export C:/Users/Alex/tp/data/exports/hacknight.csv` (Windows absolute path)
+- `export /Users/alex/tp/data/exports/hacknight.csv` (macOS absolute path)
 
 ### Editing an applicant : `edit`
 
 Edits an existing applicant in the address book. (Renamed from `modify`.) Updates an applicant using their list index; you can change one or more fields in a single command.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [tm/TEAM] [g/GITHUB_USERNAME] [r/RSVP_STATUS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [team/TEAM] [g/GITHUB_USERNAME] [r/RSVP_STATUS] [t/TAG]…​`
 
 - Edits the applicant at the specified `INDEX`. The index refers to the index number shown in the displayed applicant list. The index **must be a positive integer** 1, 2, 3, …​
 - At least one of the optional fields must be provided.
 - Existing values will be overwritten by the input values.
 - When editing tags, the existing tags of the applicant will be replaced (tags are not cumulative).
 - You can remove all the applicant's tags by typing `t/` without specifying any tags after it.
-- You can clear the team by typing `tm/` with nothing after it.
+- You can clear the team by typing `team/` with nothing after it.
 - You must enter an event first using `enter event INDEX`.
 - - `NAME` follows the same constraints as the `add` command — alphanumeric characters (including accented), spaces, apostrophes, hyphens, and forward slashes. Cannot exceed 100 characters.
 - Editing a participant to match another participant's name and phone or email will be rejected as a duplicate.
@@ -277,7 +300,7 @@ Examples:
 
 - `edit 1 p/91234567 e/johndoe@example.com` — Edits the phone number and email of the 1st applicant.
 - `edit 2 n/Betsy Crower t/` — Edits the name to `Betsy Crower` and clears all existing tags.
-- `edit 3 r/yes tm/Alpha` — Updates RSVP to yes and assigns the applicant to team Alpha.
+- `edit 3 r/yes team/Alpha` — Updates RSVP to yes and assigns the applicant to team Alpha.
 
 ### Assigning a team : `assign`
 
@@ -419,12 +442,12 @@ Furthermore, certain edits can cause TeamEventPro to behave in unexpected ways (
 | **DeleteEvent** | `deleteevent INDEX` e.g., `deleteevent 2`                                                                                                                                             |
 | **Enter**   | `enter event INDEX` e.g., `enter event 1`                                                                                                                                                 |
 | **Leave**   | `leave`                                                                                                                                                                                   |
-| **Add**     | `add n/NAME p/PHONE e/EMAIL a/ADDRESS [tm/TEAM] [g/GITHUB] [r/RSVP] [t/TAG]…​` e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd tm/Dev g/jamesho r/yes t/Python` |
+| **Add**     | `add n/NAME p/PHONE e/EMAIL a/ADDRESS [team/TEAM] [g/GITHUB] [r/RSVP] [t/TAG]…​` e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd team/Dev g/jamesho r/yes t/Python` |
 | **Assign**  | `assign INDEX team/TEAM_NAME` e.g., `assign 2 team/Alpha`                                                                                                                                 |
 | **CheckIn** | `checkin INDEX` e.g., `checkin 1`                                                                                                                                                         |
 | **Clear**   | `clear`                                                                                                                                                                                   |
 | **Delete**  | `delete INDEX` e.g., `delete 3`                                                                                                                                                           |
-| **Edit**    | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [tm/TEAM] [g/GITHUB] [r/RSVP] [t/TAG]…​` e.g., `edit 2 n/James Lee e/jameslee@example.com`                                           |
+| **Edit**    | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [team/TEAM] [g/GITHUB] [r/RSVP] [t/TAG]…​` e.g., `edit 2 n/James Lee e/jameslee@example.com`                                         |
 | **Filter**  | `filter r/RSVP` or `filter t/TAG` e.g., `filter r/yes`, `filter t/Python`                                                                                                                 |
 | **Import**  | `import FILE_PATH` or `import list` e.g., `import data/participants.csv`, `import list`                                                                                                   |
 | **List**    | `list`                                                                                                                                                                                    |
