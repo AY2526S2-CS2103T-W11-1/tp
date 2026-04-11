@@ -15,7 +15,7 @@ pageNav: 0
   - [Help : `help`](#1-help-command)
   - [List : `list`](#2-list-command)
   - [Search : `search`](#3-search-command)
-  - [Switch Mode : `switchmode`](#4-switch-mode-command)
+  - [Switch Theme : `switchtheme`](#4-switch-theme-command)
 - [Event Commands](#event-commands)
   - [Add Event : `addevent`](#cmd-addevent)
   - [Edit Event : `editevent`](#cmd-editevent)
@@ -94,7 +94,7 @@ The following commands can be used regardless of whether you are inside or outsi
 - `help`
 - `list`
 - `search`
-- `switchmode`
+- `switchtheme`
 
 Full details for these commands are in [Common Commands](#common-commands).
 
@@ -269,15 +269,11 @@ Outside an event:
 list
 ```
 
-![Command outside an event](images/list/eventcommand.png)
-
 Inside an event:
 
 ```
 list
 ```
-
-![Command inside an event](images/list/participantcommand.png)
 
 #### Successful Execution
 Outside an event: `Listed all events`
@@ -307,15 +303,11 @@ Outside an event:
 search Tech
 ```
 
-![Command outside an event](images/search/eventcommand.png)
-
 Inside an event:
 
 ```
 search [KEYWORD]...
 ```
-
-![Command inside an event](images/search/participantcommand.png)
 
 #### Successful Execution
 Outside an event: matching events are shown in the event list.
@@ -329,22 +321,23 @@ Inside an event: matching participants are shown in the participant list.
 #### Notes
 - Can be used in any mode.
 - The results depend on the current mode.
+- Outside an event, `search` checks event name, date, location, and description.
+- Inside an event, `search` checks participant name, phone, address, email, team, GitHub username, and check-in status.
+- Matching is case-insensitive and works on substrings.
 
 ---
 
-## 4. Switch Mode Command
+## 4. Switch Theme Command
 
 Used to switch the application theme.
 
 #### Format
-`switchmode [dark|light]`
+`switchtheme [dark|light]`
 
 #### Example Usage
 ```
-switchmode light
+switchtheme light
 ```
-
-![Command](images/switchmode/command.png)
 
 #### Successful Execution
 `Switched to light mode.`
@@ -396,17 +389,29 @@ addevent n/Tech Meetup 2026 d/2026-06-15 l/NUS Techno Edge desc/Annual tech netw
 ### 2.1 Edit Event Command
 <a id="cmd-editevent"></a>
 
-Used to edit the details of an existing event in the event list.
+Used to edit one or more selected details of an existing event in the event list.
 
 #### Format
 `editevent [INDEX] [n/EVENT NAME] [d/DATE] [l/LOCATION] [desc/DESCRIPTION]`
 
 #### Example Usage
+Edit multiple fields:
+
 ```
 editevent 1 n/Hack Night d/2026-08-20 l/NUS COM1 desc/Bring your laptop
 ```
 
-![Command](images/edit-event/command.png)
+Edit only the location:
+
+```
+editevent 1 l/NUS COM2
+```
+
+Edit only the description:
+
+```
+editevent 1 desc/Updated event description
+```
 
 #### Successful Execution
 
@@ -415,9 +420,10 @@ editevent 1 n/Hack Night d/2026-08-20 l/NUS COM1 desc/Bring your laptop
 #### Notes
 - Can only be used outside an event.
 - Index must be a positive integer.
+- You only need to provide the field or fields you want to edit. Fields not specified in the command will remain unchanged.
 - At least one field to edit must be provided.
-- Location can be cleared with `l/`.
-- Description can be cleared with `desc/`.
+- Location can be cleared with `l/` followed by no location text. Trailing spaces are ignored, so `l/ ` also clears the location.
+- Description can be cleared with `desc/` followed by no description text. Trailing spaces are ignored, so `desc/ ` also clears the description.
 
 ### 2.2 Delete Event Command
 <a id="cmd-deleteevent"></a>
@@ -431,8 +437,6 @@ Used to delete an event from the event list. The participant list stored under t
 ```
 deleteevent 1
 ```
-
-![Command](images/delete-event/command.png)
 
 #### Successful Execution
 
