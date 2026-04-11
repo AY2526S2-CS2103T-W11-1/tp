@@ -207,6 +207,7 @@ The command follows these steps when executed:
 Notable field constraints enforced at the model level:
 
 * `Name`: Must start with an alphanumeric character. Can contain alphanumeric characters (including Unicode letters for accented names), spaces, apostrophes, hyphens, and forward slashes. Maximum 100 characters.
+* `Email`: Must match `Email#VALIDATION_REGEX` (`local-part@domain` with the rules documented in `Email#MESSAGE_CONSTRAINTS`). The entire string must be at most `Email#MAX_LENGTH` (64) characters inclusive.
 * `RsvpStatus`: Must be `yes`, `no`, or `pending`. Defaults to `pending` if not provided.
 * `Team`: Must be alphanumeric and at most 15 characters.
 
