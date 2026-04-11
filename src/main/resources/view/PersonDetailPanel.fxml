@@ -2,13 +2,16 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" styleClass="person-detail-pane">
+<ScrollPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" styleClass="person-detail-scroll"
+            fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED" minHeight="0" maxHeight="Infinity">
+    <VBox styleClass="person-detail-pane">
     <padding>
         <Insets top="20" right="22" bottom="28" left="22"/>
     </padding>
@@ -110,7 +113,7 @@
                     </columnConstraints>
                     <Label text="STATUS" styleClass="detail-key" GridPane.columnIndex="0" GridPane.rowIndex="0"
                            GridPane.valignment="CENTER"/>
-                    <Label fx:id="attendanceValue" styleClass="status-label" maxWidth="Infinity" wrapText="false"
+                    <Label fx:id="attendanceValue" styleClass="status-label" wrapText="false"
                            GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.halignment="RIGHT"/>
                 </GridPane>
                 <Region styleClass="detail-hairline"/>
@@ -132,4 +135,5 @@
 
         </VBox>
     </VBox>
-</VBox>
+    </VBox>
+</ScrollPane>

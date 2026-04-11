@@ -330,6 +330,11 @@
     -fx-border-width: 0;
 }
 
+.person-detail-scroll,
+.person-detail-scroll > .viewport {
+    -fx-background-color: transparent;
+}
+
 .detail-name {
     -fx-text-fill: #0f172a;
     -fx-font-family: "Segoe UI Semibold";
