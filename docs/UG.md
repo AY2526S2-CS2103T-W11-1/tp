@@ -857,6 +857,7 @@ Participants from the CSV file are imported into the current event. Invalid rows
 - Can only be used inside an event.
 - Only `.csv` files are supported.
 - `import list` shows discoverable CSV files.
+- `import` with no parameters behaves the same as `import list`.
 
 ### 4.2 Export Command
 <a id="cmd-export"></a>

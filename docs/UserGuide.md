@@ -228,7 +228,8 @@ Format: `import FILE_PATH` or `import list`
 
 - You must enter an event first using `enter event INDEX`.
 - The file path must point to a `.csv` file.
-- Use `import list` (or `import` with no path) to list discoverable `.csv` files and their directories.
+- Use `import list` to list discoverable `.csv` files and their directories.
+- `import` with no parameters behaves the same as `import list`.
 - Duplicate applicants are skipped.
 - Invalid rows are skipped and reported in the command result.
 - CSV field validation uses the same rules as applicant commands where applicable:
