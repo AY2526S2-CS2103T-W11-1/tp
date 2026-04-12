@@ -176,6 +176,8 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [tm/TEAM] [g/GITHUB_USERNAM
 - `NAME` can contain alphanumeric characters (including accented characters), spaces, apostrophes (`'`), hyphens (`-`), and forward slashes (`/`). Names cannot exceed 100 characters.
 - `RSVP_STATUS` must be `yes`, `no`, or `pending` (case-insensitive). Defaults to `pending` if not provided.
 - `TEAM` must be alphanumeric and at most 15 characters.
+- `EMAIL` must be a valid `local-part@domain` address as enforced by the app and **must not exceed 64 characters** (including `@` and the domain).
+- `ADDRESS` is free text but **must not be blank** (after trimming) and **must not exceed 100 characters**.
 - Two participants are considered duplicates if they share the same name and either the same phone number or the same email.
 
 
@@ -271,6 +273,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [tm/TEAM] [g/GITHUB
 - You can clear the team by typing `tm/` with nothing after it.
 - You must enter an event first using `enter event INDEX`.
 - - `NAME` follows the same constraints as the `add` command — alphanumeric characters (including accented), spaces, apostrophes, hyphens, and forward slashes. Cannot exceed 100 characters.
+- `EMAIL` follows the same constraints as the `add` command (valid format and at most 64 characters).
+- `ADDRESS` follows the same constraints as the `add` command (non-blank after trimming, at most 100 characters).
 - Editing a participant to match another participant's name and phone or email will be rejected as a duplicate.
 
 Examples:
@@ -406,6 +410,8 @@ Furthermore, certain edits can cause TeamEventPro to behave in unexpected ways (
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI may open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. **Corrupt or unloadable `data/eventbook.json`:** if the file cannot be loaded (broken JSON or invalid required fields), the app still starts with an **empty** event list and **no** blocking warning; the next successful command may **overwrite** the file and wipe stored events and participants. **What we recommend:** back up the file before editing it manually; if your list is unexpectedly empty, close the app, restore a working copy of `eventbook.json`, and relaunch before using commands. See [Known Issues §4](UG.md#4-a-corrupted-or-unreadable-eventbookjson-can-be-overwritten-on-the-next-save) in the detailed user guide.
+4. **Invalid GitHub or RSVP values in saved JSON** are normalised (GitHub cleared, RSVP → pending) so the file can still load; auto-save may **persist** those defaults and drop the original strings without a warning. **Other** optional fields (e.g. team, tags) are **not** handled this way—invalid values there can still **fail loading** the whole file. **What we recommend:** back up before manual JSON edits; fix odd RSVP/GitHub in the app. See [Known Issues §5](UG.md#5-github-and-rsvp-are-silently-normalised-on-load-other-optional-fields-are-not) in the detailed user guide.
 
 ---
 
