@@ -69,6 +69,7 @@
         "user-stories": "User stories",
         "use-cases": "Use cases",
         "non-functional-requirements": "Non-Functional Requirements",
+        "known-limitations": "Known limitations",
         "glossary": "Glossary",
         "appendix-instructions-for-manual-testing": "Appendix: Instructions for manual testing",
         "launch-and-shutdown": "Launch and shutdown",
@@ -188,7 +189,10 @@
         "known-issues": "Known Issues",
         "1-participant-command-errors-outside-an-event-may-show-format-errors-first": "1. Participant command errors outside an event may show format errors first",
         "2-undo-is-not-fully-supported-for-some-data-changing-operations": "2. Undo is not fully supported for some data-changing operations",
-        "3-commands-do-not-auto-clear-after-an-error": "3. Commands do not auto-clear after an error"
+        "3-commands-do-not-auto-clear-after-an-error": "3. Commands do not auto-clear after an error",
+        "4-a-corrupted-or-unreadable-eventbook-json-can-be-overwritten-on-the-next-save": "4. A corrupted or unreadable eventbook.json can be overwritten on the next save",
+        "5-some-optional-participant-fields-are-silently-normalised-on-load": "5. Some optional participant fields are silently normalised on load",
+        "6-phone-numbers-do-not-accept-country-codes-or-symbols": "6. Phone numbers do not accept country codes or symbols"
       },
       "headingKeywords": {}
     },
