@@ -197,10 +197,10 @@ A prefix ends with `/` and starts a value; the value ends at the next prefix (af
 
 **Purpose** = why that data exists for organisers (not a full command list).
 
-| Prefix | Field | Purpose | Accepts | Does not accept |
-| --- | --- | --- | --- | --- |
+| Prefix | Field | Purpose | Accepts                                                      | Does not accept |
+| --- | --- | --- |--------------------------------------------------------------| --- |
 | `n/` | Name | Name of the participant | Letters, digits, spaces, `-`, `/`, `'`, e.g. `n/John O'Neil` | Symbols like `@`, `#`, `!` |
-| `p/` | Phone | Phone Number of the participant | Digits only, ≥3, e.g. `p/98765432` | Letters, `+`, spaces |
+| `p/` | Phone | Phone Number of the participant | Digits only, 3-17 digits, e.g. `p/98765432` | Letters, `+`, spaces |
 | `e/` | Email | Email address of the participant | `local@domain`, ≤**64** chars | Bad format, too long |
 | `a/` | Address | Address of the participant | Text, ≤**100** chars, not blank/space-only | Too long, whitespace-only |
 | `team/` | Team | Team assigned to the participant | Alphanumeric team name, 1-15 chars, e.g. `team/Alpha7` | Spaces/symbols/too-long text, e.g. team/Alpha Team, team/Alpha-1 |
@@ -387,14 +387,13 @@ Used to add an event to the event list by specifying the name, date, and optiona
 ```
 addevent n/Tech Meetup 2026 d/2026-06-15 l/NUS Techno Edge desc/Annual tech networking session
 ```
-![Command](images/addevent/command.png)
 
 #### Successful Execution
 ![Command](images/addevent/result.png)
 
 #### Notes
 - Can only be used outside an event.
-- `NAME` must start with an alphanumeric character and can only contain alphanumeric characters and spaces. It must not be blank.
+- `NAME` must start with an alphanumeric character, followed by any printable characters (including spaces and special characters such as `+`, `-`, `&`, `'`). It must not be blank.
 - `DATE` must follow the format `YYYY-MM-DD` e.g. `2026-06-15`.
 - `LOCATION` and `DESCRIPTION` are optional.
 - Event names are case-sensitive.
@@ -540,7 +539,6 @@ Used to add a participant to the currently entered event.
 ```
 add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 team/Development g/johndoe r/yes t/friends
 ```
-![Command](images/add/command.png)
 
 #### Successful Execution
 ![Command](images/add/result.png)
@@ -549,11 +547,12 @@ add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 team
 - Can only be used inside an event.
 - Name, phone, email, and address are required.
 - `NAME` can contain alphanumeric characters (including accented characters e.g. José, Tomáš), spaces, apostrophes (`'`), hyphens (`-`), and forward slashes (`/`) e.g. `O'Brian`, `s/o Kumar`. Names cannot exceed 100 characters.
+- `PHONE` must contain only digits, and be between 3 and 17 digits long.
 - `RSVP_STATUS` must be `yes`, `no`, or `pending` (case-insensitive). Defaults to `pending` if not provided.
 - `TEAM` must be alphanumeric and at most 15 characters.
 - `EMAIL` must satisfy the app's email format rules and **must not exceed 64 characters** (inclusive).
 - `ADDRESS` must not be blank (after trimming) and **must not exceed 100 characters** (inclusive).
-- Two participants are considered duplicates if they share the same name and either the same phone number or the same email. Duplicate participants cannot be added to the same event.
+- Two participants are considered duplicates if they share the same name (case-insensitive) and either the same phone number or the same email. Duplicate participants cannot be added to the same event.
 
 ### 1.2 Edit Command
 <a id="cmd-edit"></a>
@@ -567,7 +566,6 @@ Used to edit the details of an existing participant in the current event.
 ```
 edit 1 p/91234567 e/johndoe@example.com
 ```
-![Command](images/edit/command.png)
 
 #### Successful Execution
 ![Command](images/edit/result.png)
@@ -578,13 +576,14 @@ edit 1 p/91234567 e/johndoe@example.com
 - At least one field to edit must be provided.
 - Existing values will be overwritten by the new values.
 - `NAME` follows the same constraints as the `add` command — alphanumeric characters (including accented), spaces, apostrophes, hyphens, and forward slashes. Cannot exceed 100 characters.
+- `PHONE` must contain only digits, and be between 3 and 17 digits long.
 - `RSVP_STATUS` must be `yes`, `no`, or `pending` (case-insensitive).
 - `TEAM` must be alphanumeric and at most 15 characters.
 - `EMAIL` follows the same rules as in `add` (valid format and at most 64 characters).
 - `ADDRESS` follows the same rules as in `add` (non-blank after trimming, at most 100 characters).
 - Clear all tags by typing `t/` with nothing after it.
 - Clear the team by typing `team/` with nothing after it.
-- Editing a participant to match another participant's name and phone or email will be rejected as a duplicate.
+- Editing a participant to match another participant's name (case-insensitive) and phone or email will be rejected as a duplicate.
 
 ### 1.3 Delete Command
 <a id="cmd-delete"></a>
