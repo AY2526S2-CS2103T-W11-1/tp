@@ -207,6 +207,8 @@ The command follows these steps when executed:
 Notable field constraints enforced at the model level:
 
 * `Name`: Must start with an alphanumeric character. Can contain alphanumeric characters (including Unicode letters for accented names), spaces, apostrophes, hyphens, and forward slashes. Maximum 100 characters.
+* `Email`: Must match `Email#VALIDATION_REGEX` (`local-part@domain` with the rules documented in `Email#MESSAGE_CONSTRAINTS`). The entire string must be at most `Email#MAX_LENGTH` (64) characters inclusive.
+* `Address`: Must match `Address#VALIDATION_REGEX` (non-blank; first character must not be whitespace). The entire string must be at most `Address#MAX_LENGTH` (100) characters inclusive.
 * `Phone`: Must contain only digits, between 3 and 17 digits long.
 * `RsvpStatus`: Must be `yes`, `no`, or `pending`. Defaults to `pending` if not provided.
 * `Team`: Must be alphanumeric and at most 15 characters.
@@ -669,6 +671,10 @@ Extensions:
 8. The system should provide clear, user-friendly error messages when invalid command formats are entered, instead of terminating or crashing.
 9. The system must function fully offline with no internet connection required.
 10. Participant names must support Unicode characters to accommodate international names including accented characters (e.g. José, Tomáš), names with apostrophes (e.g. O'Brian), and names with forward slashes (e.g. s/o Kumar).
+
+### Known limitations
+
+- **Phone validation:** Participant phone numbers are restricted to **digits only** (minimum length per `Phone` validation). **Country-code prefixes** (e.g. `+65`), spaces, and punctuation are **rejected**. This behaviour is consistent with the user guide but is **overly strict** for users who naturally type international-format numbers; a future iteration could accept normalised E.164-style input or strip common separators while preserving data integrity.
 
 
 ### Glossary
