@@ -185,7 +185,14 @@
         "4-1-import-command": "4.1 Import Command",
         "4-2-export-command": "4.2 Export Command",
         "5-event-navigation": "5. Event Navigation",
-        "5-1-leave-event-command": "5.1 Leave Event Command"
+        "5-1-leave-event-command": "5.1 Leave Event Command",
+        "known-issues": "Known Issues",
+        "1-participant-command-errors-outside-an-event-may-show-format-errors-first": "1. Participant command errors outside an event may show format errors first",
+        "2-undo-is-not-fully-supported-for-some-data-changing-operations": "2. Undo is not fully supported for some data-changing operations",
+        "3-commands-do-not-auto-clear-after-an-error": "3. Commands do not auto-clear after an error",
+        "4-a-corrupted-or-unreadable-eventbook-json-can-be-overwritten-on-the-next-save": "4. A corrupted or unreadable eventbook.json can be overwritten on the next save",
+        "5-some-optional-participant-fields-are-silently-normalised-on-load": "5. Some optional participant fields are silently normalised on load",
+        "6-phone-numbers-do-not-accept-country-codes-or-symbols": "6. Phone numbers do not accept country codes or symbols"
       },
       "headingKeywords": {}
     },
