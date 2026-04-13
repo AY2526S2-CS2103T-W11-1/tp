@@ -122,7 +122,7 @@ For macOS-specific setup guidance, follow the prescribed JDK instructions in the
 
 ## 2. Install and launch
 
-1. Download the latest TeamEventPro `.jar` from the release page.
+1. Download the latest TeamEventPro `.jar` from the [GitHub Releases page](https://github.com/AY2526S2-CS2103T-W11-1/tp/releases).
 2. Place the `.jar` file in your preferred working folder.
 3. Open a terminal in that folder.
 4. Run:
@@ -237,7 +237,7 @@ The command applies to item `2` in the filtered list, not item `2` from an earli
 
 - Missing required prefix (for example, no `e/` in `add`) -> include all required prefixes.
 - Invalid index -> ensure index is a positive integer within the displayed list range.
-- Wrong team prefix -> use `tm/` for `add` and `edit`, and `team/` for `assign` and `filter`.
+- Wrong team prefix -> use `team/` for team fields in `add`, `edit`, `assign`, and `filter`.
 - Invalid RSVP value -> use only `yes`, `no`, or `pending`.
 - Multiple filter criteria in one command -> use exactly one filter criterion per `filter` command.
 - Using command in wrong mode -> use event commands outside an event, and participant commands inside an event.
@@ -538,7 +538,7 @@ Used to add a participant to the currently entered event.
 
 #### Example Usage
 ```
-add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 tm/Development g/johndoe r/yes t/friends
+add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 team/Development g/johndoe r/yes t/friends
 ```
 ![Command](images/add/command.png)
 
@@ -583,7 +583,7 @@ edit 1 p/91234567 e/johndoe@example.com
 - `EMAIL` follows the same rules as in `add` (valid format and at most 64 characters).
 - `ADDRESS` follows the same rules as in `add` (non-blank after trimming, at most 100 characters).
 - Clear all tags by typing `t/` with nothing after it.
-- Clear the team by typing `tm/` with nothing after it.
+- Clear the team by typing `team/` with nothing after it.
 - Editing a participant to match another participant's name and phone or email will be rejected as a duplicate.
 
 ### 1.3 Delete Command
@@ -598,7 +598,6 @@ Used to delete a participant from the current event.
 ```
 delete 1
 ```
-![Command](images/delete-applicants/delete-command.png)
 
 #### Successful Execution
 `Deleted Participant: ...`
@@ -647,7 +646,6 @@ Used to assign a participant to a team.
 ```
 assign 2 team/Alpha
 ```
-![Command](images/assign-team/example.jpg)
 
 #### Successful Execution
 `Assigned [participant] to Team Alpha.`
@@ -776,15 +774,26 @@ statistics
 
 Used to import participants from a CSV file into the current event.
 
+Before using `import`, ensure your CSV has the expected header format:
+
+- Required header columns: `name,phone,email,address`
+- Optional header columns: `team,github,rsvpStatus,tags,checkinStatus`
+- If optional columns are included, append them after the required columns in the order shown above.
+
 #### Format
 `import [FILE_PATH]`
 `import list`
+
+#### Path Rules
+- Relative paths are resolved from the app's working folder (where the JAR is run).
+- Absolute paths are supported.
+- Windows absolute path examples: `C:/Users/Alex/tp/data/export/hacknight.csv` or `C:\\Users\\Alex\\tp\\data\\export\\hacknight.csv`
+- macOS absolute path example: `/Users/alex/tp/data/export/hacknight.csv`
 
 #### Example Usage
 ```text
 import data/export/hacknight.csv
 ```
-![Command](images/import-export/import-command.png)
 
 To list discoverable CSV files:
 
@@ -792,6 +801,13 @@ To list discoverable CSV files:
 import list
 ```
 ![Result](images/import-export/import-found.png)
+
+Absolute path examples:
+
+```text
+import C:/Users/Alex/tp/data/export/hacknight.csv
+import /Users/alex/tp/data/export/hacknight.csv
+```
 
 #### Successful Execution
 Participants from the CSV file are imported into the current event. Invalid rows and duplicates are skipped and reported.
@@ -802,7 +818,7 @@ Participants from the CSV file are imported into the current event. Invalid rows
 - Can only be used inside an event.
 - Only `.csv` files are supported.
 - `import list` shows discoverable CSV files.
-- Required CSV headers are `name`, `phone`, `email`, and `address`.
+- `import` with no parameters behaves the same as `import list`.
 
 ### 4.2 Export Command
 <a id="cmd-export"></a>
@@ -812,18 +828,29 @@ Used to export participants from the current event to a CSV file.
 #### Format
 `export [FILE_PATH]`
 
+#### Path Rules
+- Relative paths are resolved from the app's working folder (where the JAR is run).
+- Absolute paths are supported.
+- Windows absolute path examples: `C:/Users/Alex/tp/data/exports/hacknight.csv` or `C:\\Users\\Alex\\tp\\data\\exports\\hacknight.csv`
+- macOS absolute path example: `/Users/alex/tp/data/exports/hacknight.csv`
+
 #### Example Usage
 ```text
 export data/ForTestOnly.csv
 ```
-![Command](images/import-export/export-command.png)
 
 To export using the default path:
 
 ```text
 export
 ```
-![Command](images/import-export/export-default-command.png)
+
+Absolute path examples:
+
+```text
+export C:/Users/Alex/tp/data/exports/hacknight.csv
+export /Users/alex/tp/data/exports/hacknight.csv
+```
 
 #### Successful Execution
 `Exported ... participant(s) to ...`

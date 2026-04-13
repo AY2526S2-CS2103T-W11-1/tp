@@ -73,8 +73,8 @@ The `UI` component,
 
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
-* keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` and `Event` objects residing in the `Model`.
+* keeps references to the `Logic` component in both `UiManager` and `MainWindow`, because the `UI` relies on `Logic` to execute commands and refresh state-dependent views.
+* depends on classes in the `Model` component, as it displays `Person` and `Event` objects and renders participant details.
 
 ### Logic component
 
@@ -125,9 +125,11 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
+* stores participant data in an `AddressBook` (all `Person` objects in a `UniquePersonList`).
+* stores event data in an `EventBook` (all `Event` objects in a `UniqueEventList`).
+* stores filtered views as unmodifiable observable lists for both participants (`ObservableList<Person>`) and events (`ObservableList<Event>`), so the UI updates automatically when filters or underlying data change.
+* tracks the currently active event context (`activeEvent`) when the app is in event-participants mode.
+* stores a `UserPrefs` object that represents user preferences, exposed externally through `ReadOnlyUserPrefs`.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <box type="info" seamless>
@@ -198,7 +200,7 @@ The add participant feature is facilitated by `AddCommand`. It allows the user t
 The command follows these steps when executed:
 
 1. `AddressBookParser` receives the input and creates an `AddCommandParser`.
-2. `AddCommandParser` tokenises the input using `ArgumentTokenizer` and constructs a `Person` object from the parsed fields. Required fields are `n/`, `p/`, `e/`, and `a/`. Optional fields are `tm/`, `g/`, `r/`, and `t/`.
+2. `AddCommandParser` tokenises the input using `ArgumentTokenizer` and constructs a `Person` object from the parsed fields. Required fields are `n/`, `p/`, `e/`, and `a/`. Optional fields are `team/`, `g/`, `r/`, and `t/`.
 3. `AddCommand#execute()` checks that the app is in event participant mode. If not, a `CommandException` is thrown.
 4. `AddCommand#execute()` checks for duplicates via `Model#hasPerson()`. Duplicate detection is handled by `Person#isSamePerson()`, which returns true if two persons share the same name (case-insensitive) **and** either the same phone number or the same email address.
 5. `Model#addPerson()` is called, adding the participant to the active event's `AddressBook`.
@@ -302,7 +304,7 @@ The command follows these steps when executed:
 Notable behaviours:
 
 * Editing tags replaces all existing tags entirely. To clear all tags, use `t/` with no value.
-* Editing team replaces the existing team. To clear the team, use `tm/` with no value.
+* Editing team replaces the existing team. To clear the team, use `team/` with no value.
 * All other field constraints follow the same validation rules as `AddCommand`.
 
 #### Design Considerations
@@ -691,6 +693,7 @@ Extensions:
 * **Prefix**: A field marker used in command input to indicate how a value should be interpreted by the parser (e.g. `n/` for name).
 * **Duplicate Participant**: A participant entry that the system considers identical to an existing participant according to its duplicate-detection rules.
 * **CSV (Comma-Separated Values)**: A plain-text file format used to store tabular data, where each line represents a row and commas separate values.
+* **Import/Export `FILE_PATH`**: For `import` and `export`, relative paths are resolved from the app's working directory (where the JAR is run), while absolute paths are supported on all mainstream OSes (e.g. `C:/...` or `C:\\...` on Windows, `/...` on macOS/Linux).
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
