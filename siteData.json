@@ -40,7 +40,7 @@
       "src": "DeveloperGuide.md",
       "title": "Developer Guide",
       "headings": {
-        "ab-3-developer-guide": "AB-3 Developer Guide",
+        "teameventpro-developer-guide": "TeamEventPro Developer Guide",
         "setting-up-getting-started": "Setting up, getting started",
         "design": "Design",
         "architecture": "Architecture",
@@ -148,6 +148,7 @@
         "command-fundamentals": "Command Fundamentals",
         "1-command-notation": "1. Command Notation",
         "2-command-structure-and-modes": "2. Command Structure and Modes",
+        "rsvp-vs-check-in": "RSVP vs Check-In",
         "3-prefix-reference": "3. Prefix Reference",
         "4-index-and-list-behavior": "4. Index and List Behavior",
         "5-common-mistakes-and-quick-fixes": "5. Common Mistakes and Quick Fixes",
@@ -183,7 +184,11 @@
         "4-1-import-command": "4.1 Import Command",
         "4-2-export-command": "4.2 Export Command",
         "5-event-navigation": "5. Event Navigation",
-        "5-1-leave-event-command": "5.1 Leave Event Command"
+        "5-1-leave-event-command": "5.1 Leave Event Command",
+        "known-issues": "Known Issues",
+        "1-participant-command-errors-outside-an-event-may-show-format-errors-first": "1. Participant command errors outside an event may show format errors first",
+        "2-undo-is-not-fully-supported-for-some-data-changing-operations": "2. Undo is not fully supported for some data-changing operations",
+        "3-commands-do-not-auto-clear-after-an-error": "3. Commands do not auto-clear after an error"
       },
       "headingKeywords": {}
     },
