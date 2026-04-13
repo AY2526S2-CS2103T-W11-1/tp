@@ -178,21 +178,21 @@ Most commands follow one of these patterns:
 
 ## 3. Prefix Reference
 
-| Prefix | Field | Accepts | Does not accept |
-| --- | --- | --- | --- |
+| Prefix | Field | Accepts                                                                                                                                             | Does not accept |
+| --- | --- |-----------------------------------------------------------------------------------------------------------------------------------------------------| --- |
 | `n/` | Name | Alphanumeric characters, spaces, hyphens (`-`), slashes (`/`), and apostrophes (`'`), e.g. `n/John Doe`, `n/John-Doe`, `n/John/Ong`, `n/John O'Neil` | Other special characters (for example `@`, `#`, `%`, `!`) |
-| `p/` | Phone | Digits only, at least 3 digits, e.g. `p/98765432` | Letters/symbols, e.g. `p/98A76`, `p/+6598765432` |
-| `e/` | Email | Standard email format, e.g. `e/john@example.com` | Missing `@` or invalid format, e.g. `e/johnexample.com` |
-| `a/` | Address | Free-text address, e.g. `a/311 Clementi Ave 2` |  |
-| `tm/` | Team (`add`/`edit`) | Alphanumeric team name, 1-15 chars, e.g. `tm/Alpha7` | Spaces/symbols/too-long text, e.g. `tm/Alpha Team`, `tm/Alpha-1` |
-| `team/` | Team (`assign`/`filter`) | Alphanumeric team name, 1-15 chars, e.g. `team/Alpha7` | Using `tm/` in `assign`/`filter`; invalid team format |
-| `g/` | GitHub username | GitHub-style username, e.g. `g/johndoe`, `g/john-doe` | Leading/trailing hyphen, spaces, e.g. `g/-john`, `g/john-`, `g/john doe` |
-| `r/` | RSVP status | `yes`, `no`, `pending` | Any other value, e.g. `r/maybe` |
-| `t/` | Tag | Alphanumeric tag, repeatable, e.g. `t/python t/ml` | Symbols/spaces, e.g. `t/machine-learning`, `t/data science` |
-| `d/` | Event date | `YYYY-MM-DD`, e.g. `d/2026-10-03` | Invalid date format, e.g. `d/03-10-2026` |
-| `l/` | Event location | Optional free text, e.g. `l/NUS COM1` |  |
-| `desc/` | Event description | Optional free text, e.g. `desc/Weekly meetup` |  |
-| `checkin/` | Check-in filter status | `yes`, `no` | Any other value, e.g. `checkin/maybe` |
+| `p/` | Phone | Digits only, at least 3 digits and at most 17 digits long, e.g. `p/98765432`                                                                        | Letters/symbols, e.g. `p/98A76`, `p/+6598765432` |
+| `e/` | Email | Standard email format, e.g. `e/john@example.com`                                                                                                    | Missing `@` or invalid format, e.g. `e/johnexample.com` |
+| `a/` | Address | Free-text address, e.g. `a/311 Clementi Ave 2`                                                                                                      |  |
+| `tm/` | Team (`add`/`edit`) | Alphanumeric team name, 1-15 chars, e.g. `tm/Alpha7`                                                                                                | Spaces/symbols/too-long text, e.g. `tm/Alpha Team`, `tm/Alpha-1` |
+| `team/` | Team (`assign`/`filter`) | Alphanumeric team name, 1-15 chars, e.g. `team/Alpha7`                                                                                              | Using `tm/` in `assign`/`filter`; invalid team format |
+| `g/` | GitHub username | GitHub-style username, e.g. `g/johndoe`, `g/john-doe`                                                                                               | Leading/trailing hyphen, spaces, e.g. `g/-john`, `g/john-`, `g/john doe` |
+| `r/` | RSVP status | `yes`, `no`, `pending`                                                                                                                              | Any other value, e.g. `r/maybe` |
+| `t/` | Tag | Alphanumeric tag, repeatable, e.g. `t/python t/ml`                                                                                                  | Symbols/spaces, e.g. `t/machine-learning`, `t/data science` |
+| `d/` | Event date | `YYYY-MM-DD`, e.g. `d/2026-10-03`                                                                                                                   | Invalid date format, e.g. `d/03-10-2026` |
+| `l/` | Event location | Optional free text, e.g. `l/NUS COM1`                                                                                                               |  |
+| `desc/` | Event description | Optional free text, e.g. `desc/Weekly meetup`                                                                                                       |  |
+| `checkin/` | Check-in filter status | `yes`, `no`                                                                                                                                         | Any other value, e.g. `checkin/maybe` |
 
 For required fields, an empty prefix value is invalid unless explicitly stated otherwise.
 Use the exact prefix expected by each command. Prefixes are not interchangeable.
@@ -377,14 +377,13 @@ Used to add an event to the event list by specifying the name, date, and optiona
 ```
 addevent n/Tech Meetup 2026 d/2026-06-15 l/NUS Techno Edge desc/Annual tech networking session
 ```
-![Command](images/addevent/command.png)
 
 #### Successful Execution
 ![Command](images/addevent/result.png)
 
 #### Notes
 - Can only be used outside an event.
-- `NAME` must start with an alphanumeric character and can only contain alphanumeric characters and spaces. It must not be blank.
+- `NAME` must start with an alphanumeric character, followed by any printable characters (including spaces and special characters such as `+`, `-`, `&`, `'`). It must not be blank.
 - `DATE` must follow the format `YYYY-MM-DD` e.g. `2026-06-15`.
 - `LOCATION` and `DESCRIPTION` are optional.
 - Duplicate events with the same name are not allowed.
@@ -519,7 +518,6 @@ Used to add a participant to the currently entered event.
 ```
 add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 tm/Development g/johndoe r/yes t/friends
 ```
-![Command](images/add/command.png)
 
 #### Successful Execution
 ![Command](images/add/result.png)
@@ -528,6 +526,7 @@ add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 tm/D
 - Can only be used inside an event.
 - Name, phone, email, and address are required.
 - `NAME` can contain alphanumeric characters (including accented characters e.g. José, Tomáš), spaces, apostrophes (`'`), hyphens (`-`), and forward slashes (`/`) e.g. `O'Brian`, `s/o Kumar`. Names cannot exceed 100 characters.
+- `PHONE` must contain only digits, and be between 3 and 17 digits long.
 - `RSVP_STATUS` must be `yes`, `no`, or `pending` (case-insensitive). Defaults to `pending` if not provided.
 - `TEAM` must be alphanumeric and at most 15 characters.
 - Two participants are considered duplicates if they share the same name and either the same phone number or the same email. Duplicate participants cannot be added to the same event.
@@ -538,13 +537,12 @@ add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 tm/D
 Used to edit the details of an existing participant in the current event.
 
 #### Format
-`edit [INDEX] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [g/GITHUB_USERNAME] [r/RSVP_STATUS] [tm/TEAM] [t/TAG]...`
+`edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [g/GITHUB_USERNAME] [r/RSVP_STATUS] [tm/TEAM] [t/TAG]...`
 
 #### Example Usage
 ```
 edit 1 p/91234567 e/johndoe@example.com
 ```
-![Command](images/edit/command.png)
 
 #### Successful Execution
 ![Command](images/edit/result.png)
@@ -555,6 +553,7 @@ edit 1 p/91234567 e/johndoe@example.com
 - At least one field to edit must be provided.
 - Existing values will be overwritten by the new values.
 - `NAME` follows the same constraints as the `add` command — alphanumeric characters (including accented), spaces, apostrophes, hyphens, and forward slashes. Cannot exceed 100 characters.
+- `PHONE` must contain only digits, and be between 3 and 17 digits long.
 - `RSVP_STATUS` must be `yes`, `no`, or `pending` (case-insensitive).
 - `TEAM` must be alphanumeric and at most 15 characters.
 - Clear all tags by typing `t/` with nothing after it.
